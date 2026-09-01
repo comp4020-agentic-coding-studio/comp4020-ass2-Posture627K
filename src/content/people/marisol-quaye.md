@@ -7,15 +7,16 @@ affiliation: Slop University School of Invented Disciplines
 role: convenor
 email: marisol.quaye@slop.university
 contact: Email for course-level questions; use the weekly session for feedback on work.
-photo: ./marisol-quaye.avif
-photoAlt: A stylised portrait of a person in three-quarter view, flat gold and black shapes on warm cream, in a two-ink risograph print
 ---
 
-<!-- STARTER_CONTENT: replace this person entry, then remove this comment. -->
+Marisol designed this course's structure: the twelve-week progression, the
+evidence-register discipline that runs through every historical claim (see
+[Policies](/policies/)), and the interactive builder used from week 2
+onward. She teaches most sessions and reads every piece of submitted work at
+least once.
 
-Replace this entry. A people page carries a short bio and whatever a student
-needs in order to contact the right person for the right thing --- and nothing
-that will be stale by week 3.
+There is no fixed office-hours slot — the practical work clusters unevenly
+across the semester, so consultation times are announced week by week on the
+[sessions](/sessions/) page instead. For anything that cannot wait until the
+next session, email is the fastest way to reach her.
 
-Consultation hours, contact preferences and the escalation path (who to ask
-first, who to ask when that does not work) are the parts students actually read.

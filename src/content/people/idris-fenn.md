@@ -7,11 +7,14 @@ affiliation: Slop University School of Invented Disciplines
 role: tutor
 email: idris.fenn@slop.university
 contact: Ask during sessions, or email when a question cannot wait until the next one.
-photo: ./idris-fenn.avif
-photoAlt: A stylised portrait of a person facing the viewer, flat gold and black shapes on warm cream, in a two-ink risograph print
 ---
 
-<!-- STARTER_CONTENT: replace this person entry, then remove this comment. -->
+Idris runs the small-group work in the first half of the semester, where most
+of the hands-on line, bigram and trigram construction happens, and marks
+Assignment 1. Questions about the changing-line rule, or about telling a
+sourced claim from an asserted one, are best asked in session, where the
+builder is open on-screen and easy to point at.
 
-Replace this entry. A second person makes the listing, role ordering and
-teacher-reference fields visible before you replace the cast with your own.
+Outside sessions, email is the way to reach him — flag which week's work the
+question is about, since sessions run a week ahead of the reading.
+
