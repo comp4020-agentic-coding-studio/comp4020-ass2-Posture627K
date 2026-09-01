@@ -40,23 +40,25 @@ export const slopCourseMetaSchema = z
 
 // The single source of truth for the course record. The generated homepage,
 // navigation label and /api/index.json all read this object.
-// Replace every placeholder value, but keep the shape: the catalogue ingests
-// this API contract when the course is published.
 //
-// The code's last three digits were assigned to this repo when it was
-// provisioned, and no other course in the cohort has them. Change the first
-// digit to your course's level (and `level` to match); keep the other three.
-// STARTER_CONTENT: replace this course record, then remove this comment.
+// The code's last three digits (462) were assigned to this repo when it was
+// provisioned and are kept unchanged. The level digit is 2: the course asks
+// students to read contested historical scholarship critically (see the
+// evidence-register discipline in CLAUDE.md) and ends with a transfer task,
+// which is more than an intro course, but it presumes no prior coursework —
+// not the specialised research-methods weight a 3000+ level would imply.
 export const courseMeta = slopCourseMetaSchema.parse({
-  code: "SLOP1462",
-  title: "Course Title Goes Here",
+  code: "SLOP2462",
+  title: "Patterns of Change: Taiji, Bagua, and the Visual Logic of Transformation",
   session: "Semester 1",
   year: 2027,
-  level: 1,
+  level: 2,
   startDate: "2027-02-22",
   endDate: "2027-05-28",
   description:
-    "One concise paragraph explaining what this course is, who it is for, " +
-    "and why somebody would choose to spend a semester taking it.",
-  tags: ["replace me"],
+    "A semiotics course on how a small set of visual signs can encode change " +
+    "itself, not just static categories: from a single yin-yang line, through " +
+    "trigrams and hexagrams, to how their meanings were built, arranged, and " +
+    "reinterpreted across history.",
+  tags: ["semiotics", "visual notation", "sign systems"],
 }) satisfies CourseMetaInput;

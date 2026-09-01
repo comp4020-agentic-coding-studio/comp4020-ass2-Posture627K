@@ -1,23 +1,19 @@
 ---
-title: Second lecture
-description:
-  Week 2 — the first substantive material, and the run-up to the first review
+title: One Splits into Two
+description: Taiji and the yin-yang line, kept close to the documented sequence
 week: 2
 date: 2027-03-01
 teachers:
   - idris-fenn
 related:
-  - sessions/02-first-review
-  - assessments/assignment-1
+  - sessions/week-02
 ---
 
-<!-- STARTER_CONTENT: replace this lecture, then remove this comment. -->
-
-Replace this page. It exists so the lectures listing sorts by week and the
-related block has more than one edge to draw.
+The smallest visual distinction that can carry meaning, and where Taiji sits
+in the documented Taiji → Liangyi → Sixiang → Bagua sequence.
 
 ## Outline
 
-- the first substantive material, and where it shows up in practice
-- what the first review is looking for
-- reading before next week
+- the yin/yang line as a binary distinction
+- the *Xici*'s generative sequence: Taiji → Liangyi → Sixiang → Bagua
+- what this week deliberately leaves out (no taijitu image yet — week 10)

@@ -1,38 +1,48 @@
 ---
 title: Final project
 description:
-  The capstone — a placeholder brief for the larger piece of work the semester
-  builds towards
+  The capstone — critically evaluate a modern popular claim about this
+  course's sign system, then transfer the same toolkit to one it never covered
 week: 12
 due: 2027-05-28T12:00:00+10:00
 weight: 60
 marking:
   mode: holistic
   description:
-    The final project is judged as a whole against the brief, with particular
-    attention to whether the result stands alone and whether its scope fits the
-    semester that produced it.
+    Judged as a whole against the brief, with particular attention to whether
+    the critical evaluation is sourced rather than asserted, whether at least
+    three specific claims are correctly labelled by evidence register (fact,
+    attribution, or interpretation) rather than left unmarked, and whether the
+    transfer analysis genuinely applies this course's toolkit (construction
+    rules, structural relationships, arrangement, fact-versus-interpretation
+    discipline) rather than restating facts about the new system in isolation.
 spec:
   - submitted by the deadline, in the format named below
-  - it stands on its own, without you there to explain it
-  - it answers the brief rather than restating it
+  - the critical evaluation cites primary or academic sources, not tertiary
+    wikis, for every factual claim it relies on
+  - the critical evaluation labels at least three specific claims it
+    discusses as historically attested fact, traditional/legendary
+    attribution, or later interpretation/modern analogy, using this course's
+    three evidence registers
+  - the transfer analysis names which parts of this course's toolkit it is
+    applying, and where the unfamiliar system's structure differs
 ---
-
-<!-- STARTER_CONTENT: replace this assessment brief, then remove this comment. -->
-
-Replace this brief. The final project is where a course's weights usually
-concentrate, so it is worth being explicit about how the earlier work feeds it.
 
 ## The brief
 
-> One sentence, again as a blockquote.
+> Critically evaluate one modern popular claim about Taiji, Bagua, or the
+> Yijing, then apply this course's toolkit to a sign system the course never
+> covered.
 
-Say what scope is realistic in the time available. A brief that quietly assumes
-twice the available hours is the most common way a capstone goes wrong.
+Two parts, one skill: the first half tests whether you can trace a popular
+claim back to what is actually documented; the second tests whether that same
+sourcing and analytical discipline transfers to something genuinely new to
+you.
 
 ## What you submit
 
-The artefact, and whatever a marker needs to run or read it.
-
-This one demonstrates the alternative marking mode: a holistic explanation
-rather than weighted criteria. The site renders either mode from frontmatter.
+A written evaluation (claim, sourcing trail, evidence-register label per
+claim, verdict) of the popular claim you chose, followed by a
+construction-and-analysis of an unfamiliar sign system using this course's
+toolkit — enough for a reader with no other context to follow both parts
+without you there to explain them.

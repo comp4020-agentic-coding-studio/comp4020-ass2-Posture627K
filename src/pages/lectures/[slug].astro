@@ -5,6 +5,7 @@ import RelatedContent from "astro-course-university/components/RelatedContent.as
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import { withBase } from "astro-theme-university/url";
 import TeachingTeam from "../../components/TeachingTeam.astro";
+import WeekNav from "../../components/WeekNav.astro";
 import { formatCourseDate } from "../../lib/dates";
 import { graphCollections, siteConfig } from "../../site-config";
 
@@ -24,4 +25,5 @@ const title = `Week ${lecture.data.week}: ${lecture.data.title}`;
   <Content />
   <TeachingTeam teachers={lecture.data.teachers} />
   <RelatedContent entry={lecture} collections={graphCollections} />
+  <WeekNav collection="lectures" week={lecture.data.week} />
 </ContentLayout>

@@ -50,6 +50,30 @@ Rules that follow from this:
   `docs/design-decisions.md` when you add a source — don't leave citations
   only in a commit message.
 
+### Sourcing on student-facing pages
+
+`docs/design-decisions.md` remains the one detailed research/source record.
+A session, lecture, or assessment page is content, not a bibliography — it
+should read like a course, not like the source map.
+
+- Don't duplicate the full source map on a content page: no per-paragraph
+  citation lists, no repeated "sources" section, no link back to the source
+  map from every page.
+- A contested, specific, or attribution-sensitive claim (a disputed dating, a
+  named scholar's argument, an attribution likely to be challenged) must name
+  the relevant scholar or source inline, clearly enough that the claim reads
+  as someone's documented position, not as anonymous fact — a short mention
+  ("as Shaughnessy argues...") is enough; the full citation stays in the
+  source map.
+- An ordinary structural fact that's already securely established (e.g. a
+  trigram has three lines) doesn't need a citation on every mention —
+  citation is for claims a reader could reasonably contest, not for
+  everything.
+- If a page would introduce a factual claim not already covered by the
+  approved research in `docs/design-decisions.md`, verify it against a real
+  source before writing it — don't fill the gap from memory, and don't treat
+  "the page needs a sentence here" as license to invent one.
+
 ## Terminology
 
 Use one consistent Chinese term, pinyin, and English gloss per concept across
