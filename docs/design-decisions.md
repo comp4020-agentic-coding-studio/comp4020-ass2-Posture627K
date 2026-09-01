@@ -133,7 +133,9 @@ Three evidence registers used throughout:
 | Zhouyi/Ten Wings textual layering | Richard J. Smith, *Fathoming the Cosmos and Ordering the World* (Univ. of Virginia Press, 2008) |
 | Zhouyi specific dating argument | Edward Shaughnessy, *Before Confucius* (SUNY Press) — contested, attribute by name |
 | Trigram–direction–season–family correlations | *Shuogua zhuan*, in the Wilhelm/Baynes translation (Princeton UP, Bollingen Series) |
-| Xiantian / Shao Yong | Anne Birdwhistell, *Transition to Neo-Confucianism* (Stanford UP, 1989) |
+| Xiantian / Shao Yong | Anne Birdwhistell, *Transition to Neo-Confucianism* (Stanford UP, 1989); Zhu Xi's *Yixue qimeng* (1186, trans. Joseph Adler); Fung Yu-lan (trans. Derk Bodde), *A History of Chinese Philosophy* vol. II (Princeton UP) |
+| Houtian arrangement's exact positions | *Shuogua zhuan* ch. 5; Wilhelm/Baynes, Shuo Kua ch. 5 and arrangement diagram; James Legge, *The Yî King* (SBE vol. XVI), Appendix V and introduction comparison table |
+| Shao Yong's own numbering vs. the later binary-count reading | Franklin Perkins, *Leibniz and China* (Cambridge UP, 2004); *Journal of East-West Thought* Leibniz–Bouvet literature — the binary reading is a later, reversed reinterpretation, not Shao Yong's own order |
 | Zhou Dunyi's original Taijitu | Joseph Adler (Kenyon College), translation of the *Taijitu shuo* |
 | Swirling taijitu's emergence | François Louis, "The Genesis of an Icon" (2003) — verify Ming-era attribution details against this before teaching them |
 | Leibniz–Bouvet | *Journal of East-West Thought* article; Franklin Perkins, *Leibniz and China* (Cambridge UP, 2004) |
@@ -295,6 +297,72 @@ underdefined structural term passed every existing check (schema validation,
 `pnpm check`, `check:evidence`) because those checks don't ask whether a
 technical term is singular and well-defined. `CLAUDE.md`'s "Technical
 precision" section was added in response to this specific finding.
+
+## Phase 7 note — Xiantian/Houtian arrangement verification
+
+The Phase 4/5 audit found the repository's existing description of the
+Xiantian arrangement insufficient to build an exact diagram, and (separately)
+factually imprecise: it described the arrangement itself as running "from
+Kun to Qian ... in binary-counting order, 0 to 7," which misattributes a
+later reading to Shao Yong's own construction. A read-only external
+verification pass resolved both problems. Findings, kept as three separate
+claims per `CLAUDE.md`'s evidence registers:
+
+1. **The Xiantian arrangement's eight positions** (historically attested,
+   Register 1). Confirmed against Zhu Xi's *Yixue qimeng* (1186; trans.
+   Joseph Adler), Anne Birdwhistell's *Transition to Neo-Confucianism:
+   Shao Yung on Knowledge and Symbols of Reality* (Stanford UP, 1989), and
+   Fung Yu-lan (trans. Derk Bodde), *A History of Chinese Philosophy*, vol.
+   II (Princeton UP), all of which draw the same circle, south at the top:
+   Qian S, Dui SE, Li E, Zhen NE, Kun N, Gen NW, Kan W, Xun SW. Opposite
+   pairs — Qian/Kun, Dui/Gen, Li/Kan, Zhen/Xun — are each other's line-inverse
+   (week 5), which is what "symmetrical" means for this arrangement. Encoded
+   in `src/lib/arrangements.ts` (`XIANTIAN_ARRANGEMENT`) and checked in
+   `spec/arrangements.test.ts`.
+2. **Shao Yong's own ordinal numbering of this arrangement** (historically
+   attested, Register 1): Qian (1) through Kun (8), "pure yang" first. This
+   is a separate fact from the arrangement's spatial layout above — it is a
+   count Shao Yong assigned, not a further geometric claim.
+3. **The binary-count reading (Kun 0 through Qian 7)** (later interpretation,
+   Register 3): documented as a European reading — most notably in Jesuit
+   missionary Joachim Bouvet's correspondence with Leibniz — applied to the
+   same eight positions roughly two centuries after Shao Yong, and running
+   in the *reverse* order of his own numbering, not a continuation of it.
+   Sourced via Franklin Perkins, *Leibniz and China* (Cambridge UP, 2004);
+   the specific "reverse of Shao Yong's order" framing follows the *Journal
+   of East-West Thought* Leibniz–Bouvet literature already in the Phase 1
+   source map. Week 6's prose previously collapsed claims 1 and 3 together;
+   it has been corrected to state claim 1 as the arrangement's own geometry,
+   claim 2 as Shao Yong's numbering, and claim 3 explicitly as a later,
+   retrospective reading distinct from and reversed relative to claim 2 (see
+   `src/content/sessions/week-06.mdx`).
+
+4. **The Houtian arrangement's eight positions** (historically attested,
+   Register 1, grounded in Register-1-sourced correlations already in the
+   Phase 1 map). Confirmed against the *Shuogua zhuan* itself (ch. 5),
+   Wilhelm/Baynes (*The I Ching or Book of Changes*, Shuo Kua ch. 5 and its
+   accompanying arrangement diagram), and James Legge, *The Yî King*
+   (Sacred Books of the East, vol. XVI) — its introduction's comparison
+   table and Appendix V both give the same layout, south at the top: Li S,
+   Xun SE, Zhen E, Gen NE, Kan N, Qian NW, Dui W, Kun SW. Its opposite pairs
+   — Li/Kan, Kun/Gen, Dui/Zhen, Qian/Xun — are a different set from
+   Xiantian's line-inverse pairs (only Li/Kan coincides); no Five Phases,
+   colour, animal, organ, or feng shui correspondence was added beyond what
+   the *Shuogua zhuan*/Wilhelm text already states for Li (summer), Kan
+   (winter), and Dui (midautumn) — the only three correlations week 7 or
+   `HoutianFigure.astro`'s legend name. Encoded in `src/lib/arrangements.ts`
+   (`HOUTIAN_ARRANGEMENT`) and checked in `spec/arrangements.test.ts`.
+
+Both arrangements are shown south-at-top in the new figures
+(`XiantianFigure.astro`, `HoutianFigure.astro`) because every historical
+diagram found in verification uses that orientation — redrawing north-up
+would be a silent modern convention substituted for the sourced one. The two
+components share only arrangement-agnostic structural utilities
+(`CompassPosition`, `OPPOSITE_POSITION`, `Arrangement`) in
+`src/lib/arrangements.ts`; they do not share a generic "arrangement meaning"
+abstraction, since Xiantian's and Houtian's respective notions of "opposite"
+are not the same relation (see the Phase 6 note above on the same category
+of mistake).
 
 ## Open questions for later phases
 

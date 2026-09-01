@@ -1,0 +1,113 @@
+---
+// Week 5 — the four line-inverse pairs, exactly as named in week-05.md:
+// Qian/Kun, Zhen/Xun, Kan/Li, Gen/Dui. Deliberately a plain vertical list,
+// not a circle or any other spatial layout — this is the figure that has
+// to hold the line CLAUDE.md's "Technical precision" section documents:
+// this relationship is a property of the lines alone, not of an
+// arrangement, and no arrangement (Xiantian, week 6, is the next thing this
+// course meets) should be implied here.
+import LineStack from "./LineStack.astro";
+
+type Line = "yin" | "yang";
+interface Trigram {
+  glyph: string;
+  name: string;
+  lines: Line[];
+}
+
+const pairs: [Trigram, Trigram][] = [
+  [
+    { glyph: "☰", name: "Qian", lines: ["yang", "yang", "yang"] },
+    { glyph: "☷", name: "Kun", lines: ["yin", "yin", "yin"] },
+  ],
+  [
+    { glyph: "☳", name: "Zhen", lines: ["yang", "yin", "yin"] },
+    { glyph: "☴", name: "Xun", lines: ["yin", "yang", "yang"] },
+  ],
+  [
+    { glyph: "☵", name: "Kan", lines: ["yin", "yang", "yin"] },
+    { glyph: "☲", name: "Li", lines: ["yang", "yin", "yang"] },
+  ],
+  [
+    { glyph: "☶", name: "Gen", lines: ["yin", "yin", "yang"] },
+    { glyph: "☱", name: "Dui", lines: ["yang", "yang", "yin"] },
+  ],
+];
+---
+
+<figure class="fig fig-inverse-pairs">
+  <ul class="fig-pairs">
+    {
+      pairs.map(([a, b]) => (
+        <li class="fig-pair">
+          <span class="fig-trigram">
+            <LineStack lines={a.lines} />
+            <span class="fig-card-label">{a.name}</span>
+          </span>
+          <span class="fig-connector" aria-hidden="true">
+            ↔
+          </span>
+          <span class="fig-trigram">
+            <LineStack lines={b.lines} />
+            <span class="fig-card-label">{b.name}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+  <figcaption>
+    Each pair's lines are the exact opposite of each other, line for line — true regardless of how
+    the trigrams are later arranged (weeks 6–7).
+  </figcaption>
+</figure>
+
+<style>
+  .fig-inverse-pairs {
+    margin: 1.5rem 0;
+  }
+
+  .fig-pairs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 30rem) {
+    .fig-pairs {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .fig-pair {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--at-divider);
+    border-radius: var(--at-border-radius);
+  }
+
+  .fig-trigram {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .fig-card-label {
+    font-size: 0.85rem;
+  }
+
+  .fig-connector {
+    font-size: 1.1rem;
+    color: var(--at-primary);
+  }
+
+  figcaption {
+    font-size: 0.85rem;
+    color: var(--at-text-muted);
+  }
+</style>

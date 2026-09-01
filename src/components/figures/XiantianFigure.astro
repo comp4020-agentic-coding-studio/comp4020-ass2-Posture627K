@@ -1,0 +1,181 @@
+---
+// Week 6 — the Xiantian ("Before Heaven") circular arrangement credited to
+// Shao Yong. Positions are externally verified, not reconstructed from
+// memory: the primary Chinese diagram (Zhu Xi's Yixue qimeng, 1186, trans.
+// Joseph Adler), Birdwhistell's Transition to Neo-Confucianism, and
+// Fung/Bodde's History of Chinese Philosophy vol. II all agree on the eight
+// positions in src/lib/arrangements.ts — see docs/design-decisions.md's
+// Xiantian/Houtian verification note for the full source list.
+//
+// South is at the top: every historical diagram of this arrangement uses
+// that orientation, not a modern north-up map — kept here rather than
+// silently redrawn north-up, with the axis labels making the convention
+// explicit. No cycle arrow and no ordinal numbering: the one thing this
+// figure asserts is which trigram sits opposite which, not a sequence or a
+// numbering scheme (see week-06.mdx for how those are handled in prose).
+// The faint circle (`.ring-guide`) is a purely spatial scaffold showing the
+// eight positions sit on one circle — same geometry/treatment as
+// HoutianFigure.astro's, aria-hidden, no direction or relationship implied.
+import LineStack from "./LineStack.astro";
+import { XIANTIAN_ARRANGEMENT, type CompassPosition } from "../../lib/arrangements";
+import { trigramInfo } from "../../lib/trigrams";
+
+const nodes = XIANTIAN_ARRANGEMENT.map(({ trigram, position }) => ({
+  ...trigramInfo(trigram),
+  position,
+}));
+
+const gridArea = (position: CompassPosition) => position.toLowerCase();
+---
+
+<figure class="fig fig-arrangement">
+  <div class="arrangement-frame">
+    <span class="axis-label axis-top">South</span>
+    <span class="axis-label axis-bottom">North</span>
+    <span class="axis-label axis-left">East</span>
+    <span class="axis-label axis-right">West</span>
+    <svg class="ring-guide" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <circle cx="50" cy="50" r="39" />
+    </svg>
+    <svg class="opp-lines" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <line x1="50" y1="10" x2="50" y2="90" />
+      <line x1="10" y1="50" x2="90" y2="50" />
+      <line x1="23" y1="23" x2="77" y2="77" />
+      <line x1="77" y1="23" x2="23" y2="77" />
+    </svg>
+    <ol class="arrangement-grid">
+      {
+        nodes.map(({ name, glyph, lines, position }) => (
+          <li class="node" style={`grid-area: ${gridArea(position)}`}>
+            <LineStack lines={[...lines]} />
+            <span class="node-label">
+              {glyph} {name}
+            </span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+  <figcaption>
+    The Xiantian ("Before Heaven") arrangement, a documented Song-dynasty
+    construction credited to Shao Yong (1011–1077) — kept separate from the
+    older, legendary attribution of the trigrams themselves to the
+    culture-hero Fuxi. Each week-5 line-inverse pair now sits diametrically
+    opposite its partner: Qian↔Kun, Li↔Kan, Dui↔Gen, Zhen↔Xun. Historical
+    diagrams of this arrangement place south at the top, as shown here.
+  </figcaption>
+</figure>
+
+<style>
+  .fig-arrangement {
+    margin: 1.5rem 0;
+    padding: 0 2.5rem;
+  }
+
+  .arrangement-frame {
+    position: relative;
+    width: min(100%, 26rem);
+    margin: 2.25rem auto 0.75rem;
+  }
+
+  .arrangement-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      "se s sw"
+      "e . w"
+      "ne n nw";
+    aspect-ratio: 1;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+
+  .node-label {
+    font-size: 0.72rem;
+    text-align: center;
+    color: var(--at-text-muted);
+    white-space: nowrap;
+  }
+
+  .ring-guide {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    fill: none;
+    stroke: var(--at-divider);
+    stroke-width: 0.4;
+    opacity: 0.5;
+  }
+
+  .opp-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    stroke: var(--at-divider);
+    stroke-width: 0.6;
+  }
+
+  .axis-label {
+    position: absolute;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--at-text-muted);
+    white-space: nowrap;
+  }
+
+  .axis-top {
+    top: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .axis-bottom {
+    bottom: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .axis-left {
+    top: 50%;
+    left: -0.35rem;
+    transform: translate(-100%, -50%);
+  }
+
+  .axis-right {
+    top: 50%;
+    right: -0.35rem;
+    transform: translate(100%, -50%);
+  }
+
+  @media (max-width: 26rem) {
+    .fig-arrangement {
+      padding: 0 1.65rem;
+    }
+
+    .node-label {
+      font-size: 0.68rem;
+    }
+
+    .axis-label {
+      font-size: 0.68rem;
+    }
+  }
+
+  figcaption {
+    font-size: 0.85rem;
+    color: var(--at-text-muted);
+  }
+</style>

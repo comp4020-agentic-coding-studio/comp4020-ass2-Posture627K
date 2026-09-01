@@ -1,0 +1,50 @@
+---
+// The one line primitive every Tier-1 figure stacks. Same segmented-bar
+// convention as HexagramBuilder's `.hb-bar` (two segments, a small gap for
+// yang, a wide gap for yin) reimplemented here rather than imported, since
+// the builder's version is wired to its own interactive state. Always
+// aria-hidden: the visible text label next to it (rendered by the caller)
+// carries the accessible information, so the bar itself stays decorative.
+export interface Props {
+  value: "yin" | "yang";
+}
+
+const { value } = Astro.props;
+---
+
+<span class="fig-bar" data-value={value} aria-hidden="true">
+  {
+    value === "yin" ? (
+      <>
+        <span class="fig-bar-segment" />
+        <span class="fig-bar-segment" />
+      </>
+    ) : (
+      <span class="fig-bar-segment fig-bar-segment--full" />
+    )
+  }
+</span>
+
+<style>
+  .fig-bar {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 1rem;
+    width: 3.25rem;
+    height: 0.65rem;
+  }
+
+  .fig-bar-segment {
+    flex: 1;
+    height: 100%;
+    background: currentColor;
+    border-radius: 0.1rem;
+  }
+
+  /* Yang is one genuinely unbroken bar — no split, no gap — not two
+     segments with a smaller gap than yin's. */
+  .fig-bar-segment--full {
+    width: 100%;
+  }
+</style>

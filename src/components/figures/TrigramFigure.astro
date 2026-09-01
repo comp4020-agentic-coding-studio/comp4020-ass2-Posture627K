@@ -1,0 +1,99 @@
+---
+// Week 4 — all eight trigrams. Names, natural images, and the Qian/Kun
+// father/mother roles are exactly what week-04.md states and cites to the
+// Shuogua zhuan; the other six trigrams are given a son's or daughter's
+// role in that same text, but never says which — so this figure doesn't
+// either. Line patterns (bottom to top) aren't spelled out in prose
+// anywhere on the site, but they're exactly what each trigram's own Unicode
+// glyph already depicts (☰☷☳☵☶☴☲☱, already used throughout weeks 4–7) —
+// this figure only redraws that same information as a bar stack, in the
+// site's own line-bar style, and was checked for self-consistency against
+// week-05.md's four verified line-inverse pairs before use.
+import LineStack from "./LineStack.astro";
+
+type Line = "yin" | "yang";
+interface Trigram {
+  glyph: string;
+  name: string;
+  lines: Line[];
+  naturalImage: string;
+}
+
+const trigrams: Trigram[] = [
+  { glyph: "☰", name: "Qian", lines: ["yang", "yang", "yang"], naturalImage: "Heaven, the father" },
+  { glyph: "☷", name: "Kun", lines: ["yin", "yin", "yin"], naturalImage: "Earth, the mother" },
+  { glyph: "☳", name: "Zhen", lines: ["yang", "yin", "yin"], naturalImage: "Thunder" },
+  { glyph: "☵", name: "Kan", lines: ["yin", "yang", "yin"], naturalImage: "Water" },
+  { glyph: "☶", name: "Gen", lines: ["yin", "yin", "yang"], naturalImage: "Mountain" },
+  { glyph: "☴", name: "Xun", lines: ["yin", "yang", "yang"], naturalImage: "Wind" },
+  { glyph: "☲", name: "Li", lines: ["yang", "yin", "yang"], naturalImage: "Fire" },
+  { glyph: "☱", name: "Dui", lines: ["yang", "yang", "yin"], naturalImage: "Lake" },
+];
+---
+
+<figure class="fig fig-trigrams">
+  <ol class="fig-grid">
+    {
+      trigrams.map(({ name, lines, naturalImage }) => (
+        <li class="fig-card">
+          <LineStack lines={lines} />
+          <span class="fig-card-label">
+            {name} — {naturalImage}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption>
+    All eight trigrams (Bagua, 八卦), each built from three stacked lines. Names and natural images
+    are the <em>Shuogua zhuan</em>'s attributions (week 4).
+  </figcaption>
+</figure>
+
+<style>
+  .fig-trigrams {
+    margin: 1.5rem 0;
+  }
+
+  .fig-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 48rem) {
+    .fig-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 24rem) {
+    .fig-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .fig-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0.5rem;
+    border: 1px solid var(--at-divider);
+    border-radius: var(--at-border-radius);
+  }
+
+  .fig-card-label {
+    font-size: 0.8rem;
+    text-align: center;
+    color: var(--at-text-muted);
+  }
+
+  figcaption {
+    font-size: 0.85rem;
+    color: var(--at-text-muted);
+  }
+</style>

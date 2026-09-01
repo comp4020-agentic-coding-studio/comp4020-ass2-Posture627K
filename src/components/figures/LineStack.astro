@@ -1,0 +1,26 @@
+---
+// Stacks 2 or 3 LineBars into a bigram or trigram. `lines` is bottom-to-top,
+// matching every other reading-order convention on this site (see
+// HexagramBuilder's own comment on this) — line 1 (bottom) is first in the
+// DOM, and the bottom-to-top visual order is restored purely in CSS
+// (`flex-direction: column-reverse`), never by reordering the markup.
+import LineBar from "./LineBar.astro";
+
+export interface Props {
+  lines: ("yin" | "yang")[];
+}
+
+const { lines } = Astro.props;
+---
+
+<span class="fig-stack">
+  {lines.map((value) => <LineBar value={value} />)}
+</span>
+
+<style>
+  .fig-stack {
+    display: inline-flex;
+    flex-direction: column-reverse;
+    gap: 0.3rem;
+  }
+</style>

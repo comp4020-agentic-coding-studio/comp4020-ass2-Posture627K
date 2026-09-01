@@ -1,0 +1,68 @@
+---
+// Week 3 — all four bigrams. The four combinations and their bottom-to-top
+// reading are taken directly from week-03.md's own text ("yin-yin,
+// yin-yang, yang-yin, yang-yang... Stack lines bottom to top"); no bigram
+// gets an individual name here, since week-03.md deliberately doesn't
+// assign one beyond the collective term Sixiang.
+import LineStack from "./LineStack.astro";
+
+type Line = "yin" | "yang";
+const bigrams: { bottom: Line; top: Line }[] = [
+  { bottom: "yin", top: "yin" },
+  { bottom: "yin", top: "yang" },
+  { bottom: "yang", top: "yin" },
+  { bottom: "yang", top: "yang" },
+];
+---
+
+<figure class="fig fig-bigrams">
+  <ol class="fig-grid">
+    {
+      bigrams.map(({ bottom, top }) => (
+        <li class="fig-card">
+          <LineStack lines={[bottom, top]} />
+          <span class="fig-card-label">
+            bottom {bottom} · top {top}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption>All four bigrams (Sixiang, 四象) — each column reads bottom to top.</figcaption>
+</figure>
+
+<style>
+  .fig-bigrams {
+    margin: 1.5rem 0;
+  }
+
+  .fig-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: 1rem;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fig-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0.5rem;
+    border: 1px solid var(--at-divider);
+    border-radius: var(--at-border-radius);
+  }
+
+  .fig-card-label {
+    font-size: 0.8rem;
+    text-align: center;
+    color: var(--at-text-muted);
+  }
+
+  figcaption {
+    font-size: 0.85rem;
+    color: var(--at-text-muted);
+  }
+</style>

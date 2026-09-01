@@ -1,0 +1,42 @@
+---
+// Week 2 — the smallest figure on the site: the two line values the whole
+// notation is built from. No stacking, no direction to disambiguate — just
+// yang next to yin, each named by its own visible label so the figure needs
+// no separate accessible-text layer.
+import LineBar from "./LineBar.astro";
+---
+
+<figure class="fig fig-yinyang">
+  <div class="fig-row">
+    <div class="fig-item">
+      <LineBar value="yang" />
+      <span class="fig-item-label">Yang (陽) — unbroken</span>
+    </div>
+    <div class="fig-item">
+      <LineBar value="yin" />
+      <span class="fig-item-label">Yin (陰) — broken</span>
+    </div>
+  </div>
+</figure>
+
+<style>
+  .fig-yinyang {
+    margin: 1.5rem 0;
+  }
+
+  .fig-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+  }
+
+  .fig-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .fig-item-label {
+    font-size: 0.95rem;
+  }
+</style>
