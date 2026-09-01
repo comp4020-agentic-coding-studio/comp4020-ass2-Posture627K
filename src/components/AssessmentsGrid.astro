@@ -6,21 +6,89 @@ import { formatCourseDate } from "../lib/dates";
 
 const assessments = await getPublishedCollection("assessments");
 const visible = assessments.sort((a, b) => a.data.week - b.data.week);
+const weighted = visible.filter((assessment) => assessment.data.weight != null);
 ---
+
+{
+  weighted.length > 0 && (
+    <div class="weight-stack" role="img" aria-label={`Assessment weighting: ${weighted.map((a) => `${a.data.title} ${a.data.weight}%`).join(", ")}`}>
+      <div class="weight-stack-bar">
+        {weighted.map((assessment) => (
+          <div class="weight-stack-segment" style={`flex-grow: ${assessment.data.weight};`}>
+            {assessment.data.weight}%
+          </div>
+        ))}
+      </div>
+      <ul class="weight-stack-legend">
+        {weighted.map((assessment) => (
+          <li>
+            Week {assessment.data.week}: {assessment.data.title}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 <CardGrid columns={2}>
   {
     visible.map((assessment) => (
       <Card headingLevel="h2" title={assessment.data.title} href={`/assessments/${assessment.id}/`}>
-        {assessment.data.description && <p>{assessment.data.description}</p>}
         {assessment.data.weight != null && (
-          <p>
-            <small>
-              Due {formatCourseDate(assessment.data.due)} · Weight: {assessment.data.weight}%{assessment.data.draft && " · Draft"}
-            </small>
-          </p>
+          <div class="at-card-badges">
+            <span class="at-card-badge">Due {formatCourseDate(assessment.data.due)}</span>
+            <span class="at-card-badge">Weight: {assessment.data.weight}%</span>
+            {assessment.data.draft && <span class="at-card-badge">Draft</span>}
+          </div>
         )}
+        {assessment.data.description && <p>{assessment.data.description}</p>}
       </Card>
     ))
   }
 </CardGrid>
+
+<style>
+  .weight-stack {
+    margin-block-end: 1.5rem;
+  }
+
+  .weight-stack-bar {
+    display: flex;
+    overflow: hidden;
+    border-radius: var(--at-border-radius);
+    min-height: 2.5rem;
+  }
+
+  .weight-stack-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--at-on-primary);
+  }
+
+  .weight-stack-segment:nth-of-type(odd) {
+    background: var(--at-primary);
+  }
+
+  .weight-stack-segment:nth-of-type(even) {
+    background: var(--at-secondary);
+  }
+
+  .weight-stack-segment + .weight-stack-segment {
+    border-inline-start: 2px dashed var(--at-bg);
+  }
+
+  .weight-stack-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.8rem;
+    color: var(--at-text-muted);
+  }
+</style>

@@ -47,9 +47,9 @@ const visible = people.sort((a, b) => {
         imageAlt={photoAlt(person.data)}
       >
         {person.data.role && roleLabels[person.data.role] && (
-          <p>
-            <small>{roleLabels[person.data.role]}</small>
-          </p>
+          <div class="at-card-badges">
+            <span class="at-card-badge">{roleLabels[person.data.role]}</span>
+          </div>
         )}
         <p>{person.data.description}</p>
       </Card>

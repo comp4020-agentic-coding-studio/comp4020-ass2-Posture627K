@@ -8,7 +8,7 @@ import { sessionLabels, siteConfig } from "../site-config";
 ---
 
 <ContentLayout
-  title={`${courseMeta.code}: ${courseMeta.title}`}
+  title={`${courseMeta.code}: ${courseMeta.title.split(":")[0]}`}
   description={courseMeta.description}
   heroImage={heroImage}
   heroImageAlt="A single line growing into a bigram, a trigram, and a hexagram, left to right, with one hexagram line picked out in gold as a changing line"

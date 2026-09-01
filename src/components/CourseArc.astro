@@ -1,0 +1,113 @@
+---
+// A course-specific visual anchor for the Sessions and Lectures index pages:
+// the same 12 weeks as WeekNav's own tick bar, banded by the three
+// documented phases (see src/lib/course-arc.ts) instead of a plain list.
+// Line-per-week, stacked into bands, is the same grammar the notation itself
+// uses to grow from a single line into a structure.
+import { COURSE_PHASES } from "../lib/course-arc";
+
+const totalWeeks = 12;
+const weeks = Array.from({ length: totalWeeks }, (_, i) => i + 1).map((week) => {
+  const phase = COURSE_PHASES.find((p) => week >= p.firstWeek && week <= p.lastWeek) ?? COURSE_PHASES[1];
+  return { week, phase, isPhaseStart: phase.firstWeek === week && week !== 1 };
+});
+---
+
+<div class="course-arc">
+  <ol class="course-arc-ticks">
+    {
+      weeks.map(({ week, phase, isPhaseStart }) => (
+        <li
+          class:list={[`course-arc-tick--${phase.key}`, { "course-arc-tick--phase-start": isPhaseStart }]}
+          title={`Week ${week}: ${phase.label}`}
+        />
+      ))
+    }
+  </ol>
+  <ul class="course-arc-legend">
+    {
+      COURSE_PHASES.map((phase) => (
+        <li class={`course-arc-legend-item course-arc-legend-item--${phase.key}`}>
+          {phase.label}
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .course-arc {
+    margin-block-end: 1.5rem;
+  }
+
+  .course-arc-ticks {
+    display: flex;
+    gap: 0.2rem;
+    margin: 0 0 0.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .course-arc-ticks li {
+    flex: 1;
+    height: 0.6rem;
+    min-width: 0.5rem;
+    border-radius: 0.1rem;
+  }
+
+  /* The same dashed-seam treatment the builder uses at the trigram
+     boundary, reused here to mark where one phase of the course ends and
+     the next begins. */
+  .course-arc-tick--phase-start {
+    border-inline-start: 2px dashed var(--at-bg);
+  }
+
+  .course-arc-tick--framing {
+    background: var(--at-tertiary);
+  }
+
+  .course-arc-tick--building {
+    background: var(--at-primary);
+  }
+
+  .course-arc-tick--history {
+    background: var(--at-secondary);
+  }
+
+  .course-arc-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--at-font-size-xs, 0.8rem);
+    color: var(--at-text-muted);
+  }
+
+  .course-arc-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .course-arc-legend-item::before {
+    content: "";
+    display: inline-block;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 0.15rem;
+  }
+
+  .course-arc-legend-item--framing::before {
+    background: var(--at-tertiary);
+  }
+
+  .course-arc-legend-item--building::before {
+    background: var(--at-primary);
+  }
+
+  .course-arc-legend-item--history::before {
+    background: var(--at-secondary);
+  }
+</style>

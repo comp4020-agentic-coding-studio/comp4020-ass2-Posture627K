@@ -90,7 +90,7 @@ const predictStatusId = `${id}-predict-status`;
           hexagramIndexesBottomToTop.map((index) => (
             <li
               class="hb-line hb-line--readout"
-              class:list={[{ "hb-line--trigram-boundary": index === 2 }]}
+              class:list={[{ "hb-line--trigram-boundary": index === 3 }]}
               data-line
               data-index={index}
             >
@@ -126,7 +126,7 @@ const predictStatusId = `${id}-predict-status`;
           hexagramIndexesBottomToTop.map((index) => (
             <li
               class="hb-line"
-              class:list={[{ "hb-line--trigram-boundary": index === 2 }]}
+              class:list={[{ "hb-line--trigram-boundary": index === 3 }]}
               data-line
               data-index={index}
             >
@@ -204,7 +204,7 @@ const predictStatusId = `${id}-predict-status`;
   .hexagram-builder {
     margin-block: 1.5rem;
     padding: 1rem;
-    border: 1px solid var(--hb-border, #ccc);
+    border: 1px solid var(--hb-border, var(--at-divider));
     border-radius: 0.5rem;
   }
 
@@ -251,7 +251,7 @@ const predictStatusId = `${id}-predict-status`;
 
   .hb-line--trigram-boundary {
     padding-bottom: 0.5rem;
-    border-bottom: 1px dashed var(--hb-border, #ccc);
+    border-bottom: 1px dashed var(--hb-border, var(--at-divider));
     margin-bottom: 0.15rem;
   }
 
@@ -278,20 +278,41 @@ const predictStatusId = `${id}-predict-status`;
   button[data-role="changing"] {
     font: inherit;
     cursor: pointer;
+    min-height: 2.75rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--hb-border, var(--at-divider));
+    border-radius: var(--at-border-radius);
+    background: var(--at-bg);
+    color: var(--at-text);
   }
 
   button[data-role="changing"][aria-pressed="true"] {
     font-weight: bold;
   }
 
+  /* A marked changing line fills gold, the same convention used for the
+     changing line in the course's other hexagram imagery (hero, cards). */
+  .hb-line:has(button[data-role="changing"][aria-pressed="true"]) .hb-bar {
+    color: var(--at-primary);
+  }
+
   .hb-reveal {
     margin-top: 1rem;
     font: inherit;
     cursor: pointer;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--at-primary);
+    border-radius: var(--at-border-radius);
+    background: var(--at-primary);
+    color: var(--at-on-primary);
   }
 
   .hb-reveal:disabled {
     cursor: not-allowed;
+    background: var(--at-bg-alt);
+    border-color: var(--hb-border, var(--at-divider));
+    color: var(--at-text-muted);
   }
 
   .hb-predict-status {
@@ -301,7 +322,7 @@ const predictStatusId = `${id}-predict-status`;
   .hb-result {
     margin-top: 1.5rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--hb-border, #ccc);
+    border-top: 1px solid var(--hb-border, var(--at-divider));
   }
 
   .hb-result-columns {
@@ -318,8 +339,16 @@ const predictStatusId = `${id}-predict-status`;
     font-weight: bold;
   }
 
+  .hb-feedback[data-correct="false"] {
+    color: var(--at-error);
+  }
+
   .hb-feedback[data-correct="false"]::before {
     content: "✗ ";
+  }
+
+  .hb-feedback[data-correct="true"] {
+    color: var(--at-success);
   }
 
   .hb-feedback[data-correct="true"]::before {

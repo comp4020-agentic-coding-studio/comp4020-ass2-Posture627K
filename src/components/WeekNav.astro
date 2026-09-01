@@ -1,6 +1,7 @@
 ---
 import { getPublishedCollection } from "astro-course-university/content";
 import { withBase } from "astro-theme-university/url";
+import { phaseForWeek } from "../lib/course-arc";
 
 interface Props {
   /** Graph collection to navigate within — sessions or lectures are both weekly. */
@@ -15,22 +16,46 @@ const ordered = entries.sort((a, b) => a.data.week - b.data.week);
 const index = ordered.findIndex((entry) => entry.data.week === week);
 const prev = index > 0 ? ordered[index - 1] : null;
 const next = index !== -1 && index < ordered.length - 1 ? ordered[index + 1] : null;
+const total = ordered.length;
+const position = index + 1;
 ---
 
 {
   (prev || next) && (
     <nav class="week-nav" aria-label="Week navigation">
-      {prev ? (
-        <a href={withBase(`/${collection}/${prev.id}/`)} rel="prev">
-          ← Week {prev.data.week}: {prev.data.title}
-        </a>
-      ) : (
-        <span />
-      )}
-      {next && (
-        <a href={withBase(`/${collection}/${next.id}/`)} rel="next">
-          Week {next.data.week}: {next.data.title} →
-        </a>
+      <div class="week-nav-links">
+        {prev ? (
+          <a href={withBase(`/${collection}/${prev.id}/`)} rel="prev" class="week-nav-link week-nav-link--prev">
+            ← Week {prev.data.week}: {prev.data.title}
+          </a>
+        ) : (
+          <span />
+        )}
+        {next && (
+          <a href={withBase(`/${collection}/${next.id}/`)} rel="next" class="week-nav-link week-nav-link--next">
+            Week {next.data.week}: {next.data.title} →
+          </a>
+        )}
+      </div>
+      {index !== -1 && (
+        <div class="week-nav-progress">
+          <p class="week-nav-progress-label">
+            Week {position} of {total}
+          </p>
+          <ol class="week-nav-ticks" aria-hidden="true">
+            {ordered.map((entry) => {
+              const phase = phaseForWeek(entry.data.week);
+              return (
+                <li
+                  class:list={[
+                    { "week-nav-tick--done": entry.data.week <= week },
+                    { "week-nav-tick--phase-start": phase.firstWeek === entry.data.week && entry.data.week !== 1 },
+                  ]}
+                />
+              );
+            })}
+          </ol>
+        </div>
       )}
     </nav>
   )
@@ -38,12 +63,69 @@ const next = index !== -1 && index < ordered.length - 1 ? ordered[index + 1] : n
 
 <style>
   .week-nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
     margin-block-start: 2rem;
     padding-block-start: 1rem;
-    border-block-start: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+    border-block-start: 1px solid var(--at-divider);
     font-size: 0.95rem;
+  }
+
+  .week-nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .week-nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--at-border-radius);
+  }
+
+  .week-nav-link--prev {
+    margin-inline-end: auto;
+  }
+
+  .week-nav-link--next {
+    margin-inline-start: auto;
+    text-align: end;
+  }
+
+  .week-nav-progress {
+    margin-block-start: 0.75rem;
+  }
+
+  .week-nav-progress-label {
+    margin: 0 0 0.35rem;
+    font-size: 0.8rem;
+    color: var(--at-text-muted);
+  }
+
+  .week-nav-ticks {
+    display: flex;
+    gap: 0.2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .week-nav-ticks li {
+    flex: 1;
+    height: 0.3rem;
+    min-width: 0.5rem;
+    border-radius: 0.1rem;
+    background: var(--at-bg-alt);
+    border: 1px solid var(--at-divider);
+  }
+
+  .week-nav-ticks li.week-nav-tick--done {
+    background: var(--at-primary);
+    border-color: var(--at-primary);
+  }
+
+  .week-nav-ticks li.week-nav-tick--phase-start {
+    border-inline-start: 2px dashed var(--at-text-muted);
   }
 </style>

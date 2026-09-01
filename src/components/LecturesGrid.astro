@@ -3,6 +3,7 @@ import { getPublishedCollection } from "astro-course-university/content";
 import Card from "astro-theme-university/components/Card.astro";
 import CardGrid from "astro-theme-university/components/CardGrid.astro";
 import { formatCourseDate } from "../lib/dates";
+import { phaseForWeek } from "../lib/course-arc";
 
 const lectures = await getPublishedCollection("lectures");
 const visible = lectures.sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
@@ -10,11 +11,35 @@ const visible = lectures.sort((a, b) => a.data.date.getTime() - b.data.date.getT
 
 <CardGrid columns={2}>
   {
-    visible.map((lecture) => (
-      <Card headingLevel="h2" title={lecture.data.title} href={`/lectures/${lecture.id}/`}>
-        {lecture.data.description && <p>{lecture.data.description}</p>}
-        <p><small>Week {lecture.data.week} · {formatCourseDate(lecture.data.date)}</small></p>
-      </Card>
-    ))
+    visible.map((lecture) => {
+      const phase = phaseForWeek(lecture.data.week);
+      return (
+        <Card headingLevel="h2" title={lecture.data.title} href={`/lectures/${lecture.id}/`}>
+          <div class="at-card-badges">
+            <span class="at-card-badge">Week {lecture.data.week}</span>
+            <span class="at-card-badge">{formatCourseDate(lecture.data.date)}</span>
+            <span class={`at-card-badge phase-badge phase-badge--${phase.key}`}>{phase.label}</span>
+          </div>
+          {lecture.data.description && <p>{lecture.data.description}</p>}
+        </Card>
+      );
+    })
   }
 </CardGrid>
+
+<style>
+  .phase-badge--framing {
+    background: var(--at-tertiary);
+    color: var(--at-on-primary);
+  }
+
+  .phase-badge--building {
+    background: var(--at-primary);
+    color: var(--at-on-primary);
+  }
+
+  .phase-badge--history {
+    background: var(--at-secondary);
+    color: var(--at-on-primary);
+  }
+</style>
