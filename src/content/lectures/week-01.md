@@ -13,11 +13,14 @@ related:
 ---
 
 What a sign system needs in order to represent change, not just categories —
-worked through comparison cases before the course's own notation is
-introduced.
+worked through three comparison cases (a traffic light, a musical score, a
+binary digit) before the course's own notation is introduced, and each
+case's specific failure to notate change becomes the yardstick the rest of
+the semester is measured against.
 
 ## Outline
 
 - what "representing change" means, as distinct from naming a fixed state
-- comparison cases: binary code, musical notation, traffic signals
-- the course's central question and how the next eleven weeks answer it
+- three comparison cases and where each one's transition rule actually lives
+  (outside the notation, in every case)
+- the course's central question, and how the next eleven weeks answer it

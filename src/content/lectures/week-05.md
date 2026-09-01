@@ -9,11 +9,13 @@ related:
   - sessions/week-05
 ---
 
-Relationships that hold between the eight trigrams regardless of how they
-are laid out.
+The one relationship among the eight trigrams that holds regardless of how
+they are laid out — line-inversion — and an open question about arrangement
+that week 6 answers directly.
 
 ## Outline
 
-- line-inversion as a relationship between trigrams
-- complementary opposition
-- why "relationship" and "arrangement" are different questions
+- line-inversion: flip every line, four resulting pairs
+- why this is the trigram set's one arrangement-independent relationship
+- an open question carried into week 6: do inverse pairs end up placed
+  opposite each other once an arrangement exists?

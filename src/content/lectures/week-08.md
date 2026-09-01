@@ -10,11 +10,13 @@ related:
   - assessments/assignment-1
 ---
 
-The structural mechanism that answers the course's central question, and the
-pivot from constructing signs to studying their history.
+The structural mechanism that answers the course's central question
+directly, and the pivot from constructing signs to studying their history.
 
 ## Outline
 
-- hexagrams as stacked trigram pairs
-- the changing-line rule: deriving a transformed hexagram from a starting one
-- Assignment 1, due this week, and how it draws on this week's material
+- hexagrams as stacked trigram pairs, sixty-four combinations
+- the changing-line rule: an "old" line flips, deriving a transformed
+  hexagram structurally, not by external description
+- Assignment 1, due this week, and how it draws on this week's material plus
+  weeks 6–7's arrangements

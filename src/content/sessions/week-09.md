@@ -11,6 +11,9 @@ spec:
     single-author work of known date
   - you can distinguish a specific scholar's dating argument from the
     broader scholarly uncertainty about the text's age
+  - you can name at least one later interpretive tradition (numerological or
+    philosophical) built on top of the Zhouyi, and explain why it is a
+    reception, not the core text's original content
 ---
 
 ## The question
@@ -23,13 +26,42 @@ text built around it: what do we actually know about when and how the
 
 Weeks 1–8 treated the notation as a structure to construct. From here, the
 course studies how meaning was layered onto that structure historically —
-starting with the *Zhouyi* itself.
+the second half of this course's thesis, and this week is where it starts.
+
+## A text built in layers, then read in more layers still
+
+The *Zhouyi* (周易) itself is composite: a Western Zhou divinatory core —
+hexagram judgments and line texts — later overlaid with the Ten Wings (十翼)
+commentary compiled across the Warring States into the Han, and canonized
+together with that commentary as the *Yijing* (易經) under Han Wudi in 136
+BCE. Its precise date is not settled; proposals span roughly the 10th–4th
+centuries BCE. A specific dating argument — Edward Shaughnessy's case for a
+9th-century BCE core, for instance — belongs to the scholar who made it,
+never presented as the field's consensus.
+
+That the text is layered doesn't stop at its own composition. Later readers
+built further interpretive layers on top of it: a Han-dynasty numerological
+tradition (*xiangshu*, "images and numbers") and Wang Bi's philosophical
+tradition (*yili*, "meaning and principle") each read the same core text
+through a different lens, and neither is the text's own original content —
+both are documented interpretive traditions, real and worth knowing about,
+but reception rather than source. The same is true of translation: most
+English-language readers meet this text through the Wilhelm/Baynes
+translation, itself an influential and Jungian-inflected 20th-century
+reading, not a neutral window onto the original.
+
+This is the pattern the rest of the course's second half traces: a
+structure gets built (weeks 1–8), then meaning accumulates on top of it in
+distinguishable historical layers — text and commentary this week, image
+next week (week 10), reception across cultures the week after (week 11).
+Confusing any of those layers with the structure itself, or with each
+other, is exactly the mistake this course's sourcing discipline is built to
+catch.
 
 ## What you should be able to do after this week
 
-The *Zhouyi* is a layered, composite text — a Western Zhou divinatory core
-overlaid with the Ten Wings commentary, canonized as the *Yijing* under Han
-Wudi in 136 BCE. Its precise date is not settled; proposals span roughly the
-10th–4th centuries BCE. A specific dating argument (for example, Edward
-Shaughnessy's case for a 9th-century BCE core) belongs to the scholar who
-made it — never presented as if it were the field's consensus.
+Describe the *Zhouyi* as a layered, composite text, keep a specific dating
+argument separate from the field's broader uncertainty, and name at least
+one later interpretive tradition built on top of it without treating that
+tradition as the core text's own meaning. Next week meets the second kind of
+layering this course studies: not text, but image.

@@ -10,12 +10,13 @@ related:
 ---
 
 Completing the combination rule at three lines, and the text that attributes
-each trigram its natural imagery.
+each of the eight resulting trigrams its own name, natural image, and family
+role.
 
 ## Outline
 
 - constructing all eight trigrams from the line rule
-- the *Shuogua zhuan*: direction, season, family role, and natural image per
-  trigram
+- the *Shuogua zhuan*: name, natural image (Heaven, Earth, Thunder, Water,
+  Mountain, Wind, Fire, Lake), and family role per trigram
 - how this correlational content differs from the arrangement questions in
   weeks 6–7

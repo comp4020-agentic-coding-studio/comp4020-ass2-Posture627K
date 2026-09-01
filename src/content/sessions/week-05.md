@@ -9,9 +9,9 @@ teachers:
   - marisol-quaye
 spec:
   - you can identify a trigram's line-inverse (every yin flipped to yang and
-    back)
-  - you can explain why a structural relationship (inversion, complementary
-    opposition) is not the same thing as an arrangement
+    back) and name the four inverse pairs among the eight trigrams
+  - you can explain why a line-inverse relationship holds regardless of how
+    the trigrams are arranged in space
 ---
 
 ## The question
@@ -23,11 +23,34 @@ between them regardless of layout?
 
 Week 4 gave you all eight trigrams as objects. This week looks at the
 structure between those objects, which any later arrangement (Xiantian in
-week 6, Houtian in week 7) will have to be consistent with, not invent.
+week 6, Houtian in week 7) has to be consistent with, not invent.
+
+## One relationship, four pairs
+
+With only two line values, there is exactly one way to take a trigram's
+"opposite": flip every line. Applied to the eight trigrams from week 4, this
+produces four pairs, each trigram paired with the one that shares none of
+its lines: Qian ☰ (all yang) with Kun ☷ (all yin); Zhen ☳ with Xun ☴; Kan ☵
+with Li ☲; Gen ☶ with Dui ☱. This is the trigram set's one clean
+relationship that doesn't depend on arrangement — it follows from the line
+values alone, the same construction rule from weeks 3–4, not from anything
+added on top.
+
+It is worth being precise about what this relationship is not. Some
+accounts of the Bagua describe trigrams as standing in "complementary
+opposition" without specifying whether that means this same line-inverse
+relation under another name, or something about where trigrams sit relative
+to each other once arranged in space. This course uses one term —
+line-inverse — for the one relationship that is genuinely independent of
+arrangement, and holds off on any second, spatial notion of "opposite"
+until an arrangement actually exists to be opposite within. Week 6 is where
+that spatial question becomes answerable: watch, when the Xiantian
+arrangement is introduced, whether these same four inverse pairs end up
+placed opposite each other on the circle, or not.
 
 ## What you should be able to do after this week
 
-Identify structural relationships — inversion (flip every line) and
-complementary opposition — among the eight trigrams. Keeping this separate
-from arrangement matters: an arrangement is one way of laying trigrams out in
-space, a relationship is a property of the trigrams themselves.
+Identify a trigram's line-inverse and name the four inverse pairs among the
+eight trigrams. Keeping this relationship separate from arrangement matters:
+it is a property of the trigrams themselves, true before either of the two
+arrangements the course studies next is imposed on them.

@@ -186,9 +186,11 @@ Learning outcomes:
    "sixiang" from the unrelated Four Symbols/direction-guardian tradition.
 4. **Eight from Three — Constructing the Bagua.** Full trigram construction
    and the Shuogua zhuan's attributed natural images.
-5. **Opposites and Neighbors — Relationships Among the Trigrams.** Structural
-   relationships (inversion, complementary opposition) within the trigram
-   set, independent of any one arrangement.
+5. **Opposites and Neighbors — Relationships Among the Trigrams.** The
+   trigram set's one arrangement-independent structural relationship —
+   line-inversion (flip every line) — and the four pairs it produces.
+   (Originally described as two relationships, "inversion" and "complementary
+   opposition"; simplified in Phase 6 — see the note below.)
 6. **An Inner Order — The Xiantian Arrangement.** Shao Yong's Song-dynasty
    symmetrical ordering, sourced to Birdwhistell rather than the Fuxi legend
    alone.
@@ -253,6 +255,29 @@ Recommended interaction:
   historical/critical-reading content.
 - **Deliberately excluded:** see `CLAUDE.md`'s "The interaction (builder)"
   section for the standing exclusion list this recommendation produced.
+
+## Phase 6 note — a technical-precision finding, not a historical one
+
+Week 5 originally described two apparently distinct structural relationships
+among the trigrams — "inversion" and "complementary opposition" — both
+presented as holding independent of any arrangement. Review during Phase 6's
+content expansion found that, for a two-valued three-line trigram, there is
+only one line-by-line "opposite" operation (flip every line); the second
+term either duplicated it under another name, or actually referred to which
+trigrams sit diametrically opposite each other on the Xiantian circle — a
+property of that specific arrangement, not an arrangement-independent one.
+
+The content was simplified to a single, well-defined relation — line-inverse
+— with the Xiantian-circle placement fact moved to week 6, where it belongs
+as a property of that arrangement (see the updated week 5 and week 6
+descriptions above, and the live pages in `src/content/sessions/`).
+
+This was not a failure of the factuality/evidence-register rules — no
+historical claim was wrong. It was a gap in technical precision: an
+underdefined structural term passed every existing check (schema validation,
+`pnpm check`, `check:evidence`) because those checks don't ask whether a
+technical term is singular and well-defined. `CLAUDE.md`'s "Technical
+precision" section was added in response to this specific finding.
 
 ## Open questions for later phases
 

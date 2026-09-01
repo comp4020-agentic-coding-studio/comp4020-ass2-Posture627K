@@ -74,6 +74,31 @@ should read like a course, not like the source map.
   source before writing it — don't fill the gap from memory, and don't treat
   "the page needs a sentence here" as license to invent one.
 
+## Technical precision
+
+Separate from the evidence registers above: a structural or technical claim
+about the notation itself (a relationship between trigrams, a rule governing
+lines, a property of an arrangement) can be wrong even when no historical
+fact is in play. This is about the system's own structure, not sourcing.
+
+- Don't introduce two structural terms as distinct unless their operations
+  or relationships are actually distinct — if two terms describe the same
+  operation, use one term for it.
+- Define a structural relationship operationally wherever possible: in terms
+  of what changes in the lines or structure (e.g. "flip every line"), not by
+  evocative description alone.
+- Don't treat a property of one specific arrangement (e.g. what sits opposite
+  what on the Xiantian circle) as an intrinsic property of the trigram set
+  itself, independent of arrangement.
+- If a structural term is ambiguous, or isn't already defined in
+  `docs/design-decisions.md`, verify or simplify it before teaching it — the
+  same discipline the sourcing rules apply to historical claims, applied here
+  to structure instead.
+
+This rule exists because of a specific finding, not a hypothetical: see
+`docs/design-decisions.md`'s Phase 6 note on week 5's original "inversion /
+complementary opposition" pairing.
+
 ## Terminology
 
 Use one consistent Chinese term, pinyin, and English gloss per concept across

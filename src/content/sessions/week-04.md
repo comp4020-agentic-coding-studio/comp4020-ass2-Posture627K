@@ -21,12 +21,30 @@ three lines?
 
 Week 3 established combination as the system's generative mechanism. This
 week completes it: three lines exhaust the combination rule at eight
-trigrams, the full Bagua.
+trigrams, the full Bagua (八卦).
+
+## Eight trigrams, eight natural images
+
+Three binary positions give eight combinations — the same arithmetic as
+week 3, one more line deep. Each of the eight has a name and, per the
+*Shuogua zhuan* (說卦傳, one of the Ten Wings), an attributed natural image
+and family role: Qian ☰ (three yang lines) is Heaven, the father; Kun ☷
+(three yin lines) is Earth, the mother; and the other six — Zhen ☳, Kan ☵,
+Gen ☶, Xun ☴, Li ☲, Dui ☱ — are read as Thunder, Water, Mountain, Wind,
+Fire, and Lake respectively, each assigned a son's or daughter's role
+depending on which single line differs from all-yin or all-yang and where
+it sits in the stack.
+
+That correlational content — name, image, family role — is attested to this
+specific text; it is a property of the trigram itself, independent of how
+the eight trigrams get arranged into a larger order. Two different
+arrangements of these same eight objects are still to come (weeks 6–7) —
+this week is deliberately only about what each trigram *is*, not where it
+sits.
 
 ## What you should be able to do after this week
 
 Construct all eight trigrams directly from the line rule, then meet the
-*Shuogua zhuan* (one of the Ten Wings) — the textual source that attributes
-each trigram a direction, season, family role, and natural image. That
-correlational content is attested to this specific text; later weeks
-introduce two different ways of arranging the eight trigrams it describes.
+*Shuogua zhuan*'s attributed name, natural image, and family role for each.
+Next week asks a different question about these same eight objects: how do
+they relate to each other, before any arrangement is imposed?

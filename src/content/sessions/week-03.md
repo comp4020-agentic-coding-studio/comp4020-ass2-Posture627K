@@ -24,10 +24,29 @@ Week 2 fixed the line as the system's minimal unit. Stacking a second line is
 the first real test of the combination rule that will eventually generate all
 eight trigrams.
 
+## Counting the combinations
+
+Two independent binary positions give four possible arrangements: yin-yin,
+yin-yang, yang-yin, yang-yang. Stack lines bottom to top and each of the four
+becomes a distinct bigram — the *Sixiang* (四象, "the Four Images") named in
+the *Xici*'s sequence met last week. Nothing about the count is arbitrary or
+symbolic: two binary positions always give four combinations, the same
+arithmetic that will give eight trigrams at three lines (week 4) and,
+eventually, sixty-four hexagrams at six (week 8). The system's expressive
+range comes entirely from this doubling, not from adding new kinds of marks.
+
+A naming trap is worth flagging here, not later: "Sixiang" also names a
+completely unrelated tradition, the four direction-guardian Four Symbols
+(an astronomical/mythological grouping of the Azure Dragon, White Tiger,
+Vermilion Bird, and Black Tortoise). Same English translation, two unrelated
+systems — this course's Sixiang is strictly the bigram sense, four
+combinations of two binary lines, and the two should never be read as the
+same four things under different names.
+
 ## What you should be able to do after this week
 
-Stacking two lines gives four bigrams (Sixiang, "the Four Images") —
-combinatorial growth, not four new arbitrary symbols. A caution worth
-carrying forward: "Sixiang" also names an unrelated astronomical tradition,
-the four direction-guardian Four Symbols. Same English translation, different
-system — this course's Sixiang is the bigram sense only.
+Stacking two lines gives four bigrams — combinatorial growth, not four new
+arbitrary symbols. Keep the naming caution above in mind, since it recurs in
+reverse at week 4: the same combinatorial logic that gave four bigrams here
+gives eight trigrams next week, each of which the *Shuogua zhuan* then
+attaches a specific natural image to.
