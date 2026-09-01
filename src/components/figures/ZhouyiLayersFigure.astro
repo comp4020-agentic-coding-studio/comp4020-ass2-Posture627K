@@ -1,0 +1,159 @@
+---
+// Week 9 — the Zhouyi's compositional layers plus the interpretive layers
+// later readers built on top of it, exactly as week-09.md's own prose states
+// (see docs/design-decisions.md's Register 1/3 entries for the sourcing).
+// Markup order is chronological (core first); the visual bottom-to-top stack
+// is restored purely in CSS (`flex-direction: column-reverse`), the same
+// convention LineStack.astro uses for line order — never by reordering the
+// markup. Border style, not color alone, marks how precisely each layer is
+// dated: dashed for a disputed range or a centuries-long compilation,
+// solid + accent for the one specific dated event (canonization, 136 BCE).
+// Band heights are equal and carry no time-scale meaning — the caption says
+// so directly, so nobody reads duration into them.
+interface Layer {
+  key: string;
+  variant: "range" | "event";
+  label: string;
+  detail: string;
+  tag?: string;
+}
+
+const layers: Layer[] = [
+  {
+    key: "core",
+    variant: "range",
+    label: "Core Zhouyi (周易)",
+    detail:
+      "Western Zhou divinatory core — hexagram judgments and line texts. Date disputed: proposals span roughly the 10th–4th centuries BCE.",
+    tag: "Shaughnessy's case for a ~9th-century BCE core is his own argument, not the field's consensus.",
+  },
+  {
+    key: "wings",
+    variant: "range",
+    label: "Ten Wings (十翼) commentary",
+    detail:
+      "Compiled across the Warring States into the Han — added on top of the core, not part of its original composition.",
+  },
+  {
+    key: "canon",
+    variant: "event",
+    label: "Canonized as the Yijing (易經)",
+    detail: "Under Han Wudi, 136 BCE — core and commentary bound together as one canonical classic.",
+  },
+  {
+    key: "reception",
+    variant: "range",
+    label: "Later interpretive traditions",
+    detail:
+      "Han-dynasty xiangshu numerology, Wang Bi's yili philosophical reading, and the 20th-century Wilhelm/Baynes translation — documented receptions built on the canonized text, not its original content.",
+  },
+];
+---
+
+<figure class="fig fig-zhouyi-layers">
+  <p class="zl-axis-label zl-axis-top">more recent</p>
+  <ol class="zl-layers">
+    {
+      layers.map(({ key, variant, label, detail, tag }) => (
+        <li class={`zl-layer zl-layer--${key} zl-layer--${variant}`}>
+          <span class="zl-label">{label}</span>
+          <span class="zl-detail">{detail}</span>
+          {tag && <span class="zl-tag">{tag}</span>}
+        </li>
+      ))
+    }
+  </ol>
+  <p class="zl-axis-label zl-axis-bottom">earlier</p>
+  <figcaption>
+    Four distinct historical layers, not one uniform text. Dashed bands mark
+    broad, disputed periods; the solid accented band marks the one dated
+    event, canonization in 136 BCE. Band heights are equal for legibility
+    only — they do not represent duration.
+  </figcaption>
+</figure>
+
+<style>
+  .fig-zhouyi-layers {
+    margin: 1.5rem 0;
+  }
+
+  .zl-axis-label {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--at-text-muted);
+  }
+
+  .zl-axis-top {
+    margin-bottom: 0.35rem;
+  }
+
+  .zl-axis-bottom {
+    margin-top: 0.35rem;
+  }
+
+  .zl-layers {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .zl-layer {
+    padding: 0.65rem 0.85rem;
+    border: 1px dashed var(--at-divider);
+    border-radius: var(--at-border-radius);
+    background: var(--at-bg-alt);
+  }
+
+  .zl-layer--event {
+    border-style: solid;
+    border-color: var(--at-primary);
+  }
+
+  .zl-label {
+    display: block;
+    font-weight: 600;
+  }
+
+  .zl-detail {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.85rem;
+    color: var(--at-text-muted);
+  }
+
+  .zl-tag {
+    display: inline-block;
+    margin-top: 0.4rem;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.75rem;
+    border: 1px dashed var(--at-divider);
+    border-radius: var(--at-border-radius);
+    color: var(--at-text-muted);
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--at-text-muted);
+  }
+
+  @media (max-width: 26rem) {
+    .zl-layer {
+      padding: 0.55rem 0.7rem;
+    }
+
+    .zl-label {
+      font-size: 0.95rem;
+    }
+
+    .zl-detail,
+    .zl-tag {
+      font-size: 0.78rem;
+    }
+  }
+</style>
