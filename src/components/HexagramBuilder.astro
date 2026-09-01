@@ -1,0 +1,508 @@
+---
+// A minimal, working prototype: build a lower and upper trigram, watch them
+// combine into a hexagram, mark changing lines, predict the transformed
+// result, then reveal it. See CLAUDE.md's "The interaction (builder)"
+// section for what this deliberately excludes (meanings, judgment texts,
+// arrangements, taijitu imagery, scoring, a hexagram browser, in-tool
+// commentary).
+export interface Props {
+  id?: string;
+}
+
+const { id = "hexagram-builder" } = Astro.props;
+
+// Line 1 is the bottom line everywhere in this tool (index 0 in the domain
+// model). Rendered in that order in the DOM too, so list position, tab
+// order, and any assistive-technology "item N of 6" announcement all agree
+// with the notation's own reading order — the visual bottom-to-top stack is
+// restored purely in CSS (`flex-direction: column-reverse`), not by
+// reordering the markup.
+const trigramIndexesBottomToTop = [0, 1, 2];
+const hexagramIndexesBottomToTop = [0, 1, 2, 3, 4, 5];
+// The upper trigram's own line 1 is the hexagram's line 4 — keep line
+// numbers meaning the same thing (a position in the six-line hexagram)
+// wherever they appear, rather than inventing a second, trigram-local scheme.
+const upperLineNumber = (localIndex: number) => localIndex + 4;
+const predictStatusId = `${id}-predict-status`;
+---
+
+<div class="hexagram-builder" data-hexagram-builder id={id}>
+  <div class="hb-columns">
+    <section class="hb-column" aria-labelledby={`${id}-build-heading`}>
+      <h3 id={`${id}-build-heading`}>Build a hexagram</h3>
+      <p class="hb-hint">
+        Toggle the lower trigram's lines, then the upper trigram's — in any
+        order. They stack into the hexagram below. Then mark the lines you
+        want to change.
+      </p>
+
+      <h4>Lower trigram</h4>
+      <ol class="hb-lines" data-section="lower">
+        {
+          trigramIndexesBottomToTop.map((index) => (
+            <li class="hb-line" data-line data-index={index}>
+              <span class="hb-line-number">Line {index + 1}</span>
+              <span class="hb-bar" data-value="yang" aria-hidden="true">
+                <span class="hb-bar-segment" />
+                <span class="hb-bar-segment" />
+              </span>
+              <button
+                type="button"
+                data-role="lower-value"
+                data-index={index}
+                aria-pressed="false"
+                aria-label={`Line ${index + 1} value: Yang`}
+              >
+                Yang
+              </button>
+            </li>
+          ))
+        }
+      </ol>
+
+      <h4>Upper trigram</h4>
+      <ol class="hb-lines" data-section="upper">
+        {
+          trigramIndexesBottomToTop.map((index) => (
+            <li class="hb-line" data-line data-index={index}>
+              <span class="hb-line-number">Line {upperLineNumber(index)}</span>
+              <span class="hb-bar" data-value="yang" aria-hidden="true">
+                <span class="hb-bar-segment" />
+                <span class="hb-bar-segment" />
+              </span>
+              <button
+                type="button"
+                data-role="upper-value"
+                data-index={index}
+                aria-pressed="false"
+                aria-label={`Line ${upperLineNumber(index)} value: Yang`}
+              >
+                Yang
+              </button>
+            </li>
+          ))
+        }
+      </ol>
+
+      <h4>Combined hexagram</h4>
+      <ol class="hb-lines hb-lines--readout" data-section="combined">
+        {
+          hexagramIndexesBottomToTop.map((index) => (
+            <li
+              class="hb-line hb-line--readout"
+              class:list={[{ "hb-line--trigram-boundary": index === 2 }]}
+              data-line
+              data-index={index}
+            >
+              <span class="hb-line-number">Line {index + 1}</span>
+              <span class="hb-bar" data-value="yang" aria-hidden="true">
+                <span class="hb-bar-segment" />
+                <span class="hb-bar-segment" />
+              </span>
+              <span data-role="combined-label">Yang</span>
+              <button
+                type="button"
+                data-role="changing"
+                data-index={index}
+                aria-pressed="false"
+                aria-label={`Mark line ${index + 1} as changing`}
+              >
+                Mark changing
+              </button>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="hb-column" aria-labelledby={`${id}-predict-heading`}>
+      <h3 id={`${id}-predict-heading`}>Predict the transformation</h3>
+      <p class="hb-hint">
+        Before revealing, set every line to what you think it becomes once
+        the marked lines flip. All six must be set before you can reveal.
+      </p>
+      <ol class="hb-lines" data-section="prediction">
+        {
+          hexagramIndexesBottomToTop.map((index) => (
+            <li
+              class="hb-line"
+              class:list={[{ "hb-line--trigram-boundary": index === 2 }]}
+              data-line
+              data-index={index}
+            >
+              <span class="hb-line-number">Line {index + 1}</span>
+              <span class="hb-bar" data-value="yang" aria-hidden="true">
+                <span class="hb-bar-segment" />
+                <span class="hb-bar-segment" />
+              </span>
+              <button
+                type="button"
+                data-role="prediction-value"
+                data-index={index}
+                aria-pressed="false"
+                aria-label={`Line ${index + 1} predicted value: Yang`}
+              >
+                Yang
+              </button>
+            </li>
+          ))
+        }
+      </ol>
+      <p id={predictStatusId} class="hb-predict-status" data-role="predict-status" aria-live="polite">
+        Set all six predicted lines before revealing (0 of 6 set).
+      </p>
+      <button type="button" class="hb-reveal" data-role="reveal" disabled aria-describedby={predictStatusId}>
+        Reveal the transformation
+      </button>
+    </section>
+  </div>
+
+  <section class="hb-result" data-role="result" hidden aria-live="polite">
+    <h3>Result</h3>
+    <p class="hb-verdict" data-role="verdict"></p>
+    <div class="hb-result-columns">
+      <div>
+        <h4>Original</h4>
+        <ol class="hb-lines hb-lines--readout" data-section="result-original">
+          {
+            hexagramIndexesBottomToTop.map((index) => (
+              <li class="hb-line hb-line--readout" data-line data-index={index}>
+                <span class="hb-line-number">Line {index + 1}</span>
+                <span class="hb-bar" data-value="yang" aria-hidden="true">
+                  <span class="hb-bar-segment" />
+                  <span class="hb-bar-segment" />
+                </span>
+                <span data-role="result-original-label">Yang</span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+      <div>
+        <h4>Transformed (actual)</h4>
+        <ol class="hb-lines hb-lines--readout" data-section="result-actual">
+          {
+            hexagramIndexesBottomToTop.map((index) => (
+              <li class="hb-line hb-line--readout" data-line data-index={index}>
+                <span class="hb-line-number">Line {index + 1}</span>
+                <span class="hb-bar" data-value="yang" aria-hidden="true">
+                  <span class="hb-bar-segment" />
+                  <span class="hb-bar-segment" />
+                </span>
+                <span data-role="result-actual-label">Yang</span>
+                <span class="hb-feedback" data-role="feedback"></span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .hexagram-builder {
+    margin-block: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--hb-border, #ccc);
+    border-radius: 0.5rem;
+  }
+
+  .hb-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .hb-column {
+    flex: 1 1 16rem;
+  }
+
+  .hb-hint {
+    font-size: 0.9rem;
+  }
+
+  .hb-column h4 {
+    margin-block: 0.75rem 0.35rem;
+    font-size: 0.95rem;
+  }
+
+  .hb-lines {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* Line 1 (bottom) is first in the DOM/reading order; this restores the
+       correct bottom-to-top visual stack without reordering the markup. */
+    flex-direction: column-reverse;
+    gap: 0.35rem;
+  }
+
+  .hb-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hb-line-number {
+    font-size: 0.85rem;
+    min-width: 3.5rem;
+  }
+
+  .hb-line--trigram-boundary {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed var(--hb-border, #ccc);
+    margin-bottom: 0.15rem;
+  }
+
+  .hb-bar {
+    display: flex;
+    gap: 0.4rem;
+    width: 5rem;
+    height: 0.8rem;
+  }
+
+  .hb-bar-segment {
+    flex: 1;
+    background: currentColor;
+    border-radius: 0.1rem;
+  }
+
+  .hb-bar[data-value="yin"] {
+    gap: 1.4rem;
+  }
+
+  button[data-role="lower-value"],
+  button[data-role="upper-value"],
+  button[data-role="prediction-value"],
+  button[data-role="changing"] {
+    font: inherit;
+    cursor: pointer;
+  }
+
+  button[data-role="changing"][aria-pressed="true"] {
+    font-weight: bold;
+  }
+
+  .hb-reveal {
+    margin-top: 1rem;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .hb-reveal:disabled {
+    cursor: not-allowed;
+  }
+
+  .hb-predict-status {
+    font-size: 0.85rem;
+  }
+
+  .hb-result {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--hb-border, #ccc);
+  }
+
+  .hb-result-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .hb-line--readout {
+    justify-content: flex-start;
+  }
+
+  .hb-feedback {
+    font-weight: bold;
+  }
+
+  .hb-feedback[data-correct="false"]::before {
+    content: "✗ ";
+  }
+
+  .hb-feedback[data-correct="true"]::before {
+    content: "✓ ";
+  }
+</style>
+
+<script>
+  import {
+    combineTrigrams,
+    applyChangingLines,
+    comparePrediction,
+    incorrectLineNumbers,
+    isPredictionComplete,
+    type Hexagram,
+    type LineValue,
+    type Trigram,
+  } from "../lib/hexagram";
+
+  function initHexagramBuilder(root: HTMLElement) {
+    const lower: LineValue[] = Array(3).fill("yang");
+    const upper: LineValue[] = Array(3).fill("yang");
+    const changing = new Set<number>();
+    const prediction: LineValue[] = Array(6).fill("yang");
+    const predictionTouched: boolean[] = Array(6).fill(false);
+
+    const query = <T extends Element>(selector: string) => root.querySelectorAll<T>(selector);
+
+    // Line 1 is the bottom line everywhere; the upper trigram's own local
+    // index 0-2 maps to hexagram lines 4-6.
+    function lineNumberFor(section: string, index: number): number {
+      return section === "upper" ? index + 4 : index + 1;
+    }
+
+    // `valueButtonRole` names the button that both toggles and displays this
+    // line's value (lower-value/upper-value/prediction-value). Sections with
+    // no such button (combined/result-original/result-actual are read-only
+    // here) pass `labelRole` for their plain readout span instead — the
+    // "combined" item's *other* button (data-role="changing") must never be
+    // matched by this, or marking a line changing would get its label
+    // clobbered by the next value re-render.
+    function renderValue(
+      section: string,
+      index: number,
+      value: LineValue,
+      target: { valueButtonRole: string; labelText: string } | { labelRole: string },
+    ) {
+      const item = root.querySelector<HTMLElement>(`[data-section="${section}"] [data-line][data-index="${index}"]`);
+      if (!item) return;
+      const bar = item.querySelector<HTMLElement>(".hb-bar");
+      if (bar) bar.dataset.value = value;
+      const display = value === "yang" ? "Yang" : "Yin";
+      if ("valueButtonRole" in target) {
+        const button = item.querySelector<HTMLButtonElement>(`button[data-role="${target.valueButtonRole}"]`);
+        if (button) {
+          button.textContent = display;
+          button.setAttribute("aria-pressed", value === "yin" ? "true" : "false");
+          button.setAttribute("aria-label", `Line ${lineNumberFor(section, index)} ${target.labelText}: ${display}`);
+        }
+      } else {
+        const label = item.querySelector<HTMLElement>(`[data-role="${target.labelRole}"]`);
+        if (label) label.textContent = display;
+      }
+    }
+
+    function hideResult() {
+      const result = root.querySelector<HTMLElement>('[data-role="result"]');
+      if (result) result.hidden = true;
+    }
+
+    function recomputeCombined() {
+      const combined = combineTrigrams(lower as unknown as Trigram, upper as unknown as Trigram);
+      combined.forEach((value, index) => renderValue("combined", index, value, { labelRole: "combined-label" }));
+    }
+
+    function updateRevealAvailability() {
+      const revealButton = root.querySelector<HTMLButtonElement>('button[data-role="reveal"]');
+      const status = root.querySelector<HTMLElement>('[data-role="predict-status"]');
+      const ready = isPredictionComplete(predictionTouched);
+      if (revealButton) revealButton.disabled = !ready;
+      if (status) {
+        const touchedCount = predictionTouched.filter(Boolean).length;
+        status.textContent = ready
+          ? "All six lines predicted — ready to reveal."
+          : `Set all six predicted lines before revealing (${touchedCount} of 6 set).`;
+      }
+    }
+
+    query<HTMLButtonElement>('[data-section="lower"] button[data-role="lower-value"]').forEach((button) => {
+      button.addEventListener("click", () => {
+        const index = Number(button.dataset.index);
+        lower[index] = lower[index] === "yang" ? "yin" : "yang";
+        renderValue("lower", index, lower[index], { valueButtonRole: "lower-value", labelText: "value" });
+        recomputeCombined();
+        hideResult();
+      });
+    });
+
+    query<HTMLButtonElement>('[data-section="upper"] button[data-role="upper-value"]').forEach((button) => {
+      button.addEventListener("click", () => {
+        const index = Number(button.dataset.index);
+        upper[index] = upper[index] === "yang" ? "yin" : "yang";
+        renderValue("upper", index, upper[index], { valueButtonRole: "upper-value", labelText: "value" });
+        recomputeCombined();
+        hideResult();
+      });
+    });
+
+    query<HTMLButtonElement>('[data-section="combined"] button[data-role="changing"]').forEach((button) => {
+      button.addEventListener("click", () => {
+        const index = Number(button.dataset.index);
+        const lineNumber = index + 1;
+        if (changing.has(index)) {
+          changing.delete(index);
+          button.setAttribute("aria-pressed", "false");
+          button.textContent = "Mark changing";
+          button.setAttribute("aria-label", `Mark line ${lineNumber} as changing`);
+        } else {
+          changing.add(index);
+          button.setAttribute("aria-pressed", "true");
+          button.textContent = "Unmark changing";
+          button.setAttribute("aria-label", `Unmark line ${lineNumber} as changing`);
+        }
+        hideResult();
+      });
+    });
+
+    query<HTMLButtonElement>('[data-section="prediction"] button[data-role="prediction-value"]').forEach(
+      (button) => {
+        button.addEventListener("click", () => {
+          const index = Number(button.dataset.index);
+          prediction[index] = prediction[index] === "yang" ? "yin" : "yang";
+          predictionTouched[index] = true;
+          renderValue("prediction", index, prediction[index], {
+            valueButtonRole: "prediction-value",
+            labelText: "predicted value",
+          });
+          updateRevealAvailability();
+          hideResult();
+        });
+      },
+    );
+
+    const revealButton = root.querySelector<HTMLButtonElement>('button[data-role="reveal"]');
+    revealButton?.addEventListener("click", () => {
+      if (!isPredictionComplete(predictionTouched)) return;
+
+      const originalHexagram = combineTrigrams(lower as unknown as Trigram, upper as unknown as Trigram);
+      const predictionHexagram = prediction as unknown as Hexagram;
+      const actual = applyChangingLines(originalHexagram, changing);
+      const { correct, perLine } = comparePrediction(predictionHexagram, actual);
+
+      for (let index = 0; index < 6; index++) {
+        renderValue("result-original", index, originalHexagram[index], { labelRole: "result-original-label" });
+        renderValue("result-actual", index, actual[index], { labelRole: "result-actual-label" });
+
+        const feedback = root.querySelector<HTMLElement>(
+          `[data-section="result-actual"] [data-line][data-index="${index}"] [data-role="feedback"]`,
+        );
+        if (feedback) {
+          const lineCorrect = perLine[index];
+          feedback.dataset.correct = String(lineCorrect);
+          feedback.textContent = lineCorrect
+            ? "correct"
+            : `your prediction: ${predictionHexagram[index] === "yang" ? "Yang" : "Yin"}`;
+        }
+      }
+
+      const verdict = root.querySelector<HTMLElement>('[data-role="verdict"]');
+      if (verdict) {
+        const wrongLines = incorrectLineNumbers(perLine);
+        verdict.textContent = correct
+          ? "All six lines correct."
+          : `${6 - wrongLines.length} of 6 lines correct — check line(s) ${wrongLines.join(", ")}.`;
+      }
+
+      const result = root.querySelector<HTMLElement>('[data-role="result"]');
+      if (result) result.hidden = false;
+    });
+
+    recomputeCombined();
+    updateRevealAvailability();
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-hexagram-builder]").forEach(initHexagramBuilder);
+</script>

@@ -16,6 +16,8 @@ related:
   - assessments/assignment-1
 ---
 
+import HexagramBuilder from "../../components/HexagramBuilder.astro";
+
 ## The question
 
 Everything so far has built static objects — lines, bigrams, trigrams. What
@@ -49,6 +51,14 @@ comes next is stored anywhere except in the marked line itself — the
 transformation is structural, not a separate description bolted onto the
 diagram. This is the direct technical answer to the question week 1 opened
 with: a state that carries, inside itself, which state it becomes next.
+
+## Try it
+
+Build a hexagram below, mark one or more lines as changing, predict what the
+transformed hexagram will look like, then reveal it and check your
+prediction line by line.
+
+<HexagramBuilder id="week-08-hexagram-builder" />
 
 ## What you should be able to do after this week
 
