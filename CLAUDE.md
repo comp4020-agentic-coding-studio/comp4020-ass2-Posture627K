@@ -1,6 +1,6 @@
 # Harness — Patterns of Change
 
-Course: SLOP1462, *Patterns of Change: Taiji, Bagua, and the Visual Logic of
+Course: SLOP2462, *Patterns of Change: Taiji, Bagua, and the Visual Logic of
 Transformation*. Central question: **how can a small set of visual symbols
 represent change and transformation?** Full rationale, the 12-week
 progression, the interaction-design comparison, the factuality source map and

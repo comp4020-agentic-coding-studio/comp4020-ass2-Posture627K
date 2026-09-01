@@ -11,9 +11,9 @@ contact: Email for course-level questions; use the weekly session for feedback o
 
 Marisol designed this course's structure: the twelve-week progression, the
 evidence-register discipline that runs through every historical claim (see
-[Policies](/policies/)), and the interactive builder used from week 2
-onward. She teaches most sessions and reads every piece of submitted work at
-least once.
+[Policies](/policies/)), and the interactive builder that anchors week 8,
+where students construct a full hexagram and derive its transformation. She
+teaches most sessions and reads every piece of submitted work at least once.
 
 There is no fixed office-hours slot — the practical work clusters unevenly
 across the semester, so consultation times are announced week by week on the

@@ -256,6 +256,23 @@ Recommended interaction:
 - **Deliberately excluded:** see `CLAUDE.md`'s "The interaction (builder)"
   section for the standing exclusion list this recommendation produced.
 
+**Final scope note (post-build):** the progressive weeks 2/3/4 embeddings
+above were the original recommendation, not what shipped. Once the full
+twelve-week curriculum and the week-8 builder both existed, reconsidering the
+progressive version against the finished content showed it added a
+partially-capable copy of the same tool three weeks before its central use,
+with no independent learning goal of its own — weeks 2–4 already teach line,
+bigram, and trigram construction directly through their session content and
+worked examples, without needing an on-screen tool to do it. Week 8 is also
+where the progressive plan's own capstone step (full hexagram stacking, the
+changing-line prediction, and side-by-side transformation feedback) lives,
+and it's the first point where students have enough prior material — lines,
+trigrams, and the changing-line rule itself — for that feedback to mean
+anything. The final build keeps the interactive lab exclusively at week 8 for
+that reason, rather than introducing it in a reduced form earlier. This
+supersedes the week mapping above for weeks 2–4; the week-8 entry in that
+mapping, and everything else in this Phase 3 comparison, still holds.
+
 ## Phase 6 note — a technical-precision finding, not a historical one
 
 Week 5 originally described two apparently distinct structural relationships
