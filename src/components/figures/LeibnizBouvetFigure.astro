@@ -1,0 +1,258 @@
+---
+// Week 11 — the main conceptual figure: an already-existing sign system
+// (left), a documented historical transmission of it (middle), and a later
+// reinterpretation of the same patterns through a different mathematical
+// framework (right). The point is the direction of interpretation — an
+// existing notation was re-read, not invented, by the later framework — see
+// docs/design-decisions.md's Register 1 Leibniz–Bouvet entry and Phase 9
+// note for every date and claim below; nothing here is a new claim.
+//
+// Qian and Kun are the two example trigrams because they are the pair
+// week 6 already names as the binary reading's documented endpoints
+// (Kun = 0, Qian = 7) — not a pair chosen for this figure. Line data and
+// Xiantian positions come from src/lib/trigrams.ts and
+// src/lib/arrangements.ts; the binary reading comes from
+// src/lib/leibnizBinary.ts. None of it is re-derived or hard-coded here.
+import LineStack from "./LineStack.astro";
+import { trigramInfo, type TrigramName } from "../../lib/trigrams";
+import { XIANTIAN_ARRANGEMENT, positionOf } from "../../lib/arrangements";
+import { leibnizBinaryDigits, leibnizBinaryValue } from "../../lib/leibnizBinary";
+
+const EXAMPLES: TrigramName[] = ["Qian", "Kun"];
+const examples = EXAMPLES.map((name) => ({
+  ...trigramInfo(name),
+  position: positionOf(XIANTIAN_ARRANGEMENT, name),
+  digits: leibnizBinaryDigits(name),
+  value: leibnizBinaryValue(name),
+}));
+---
+
+<figure class="fig fig-leibniz-bouvet">
+  <ol class="lb-stages">
+    <li class="lb-stage">
+      <h3 class="lb-stage-heading">Pre-existing notation</h3>
+      <p class="lb-stage-sub">
+        Yin/yang lines and trigram patterns — Shao Yong's Xiantian
+        arrangement (week 6), already an existing sign system before any
+        contact with Europe.
+      </p>
+      <ul class="lb-examples">
+        {
+          examples.map(({ name, glyph, lines }) => (
+            <li class="lb-example">
+              <LineStack lines={[...lines]} />
+              <span class="lb-example-label">
+                {glyph} {name}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </li>
+    <li class="lb-connector" aria-hidden="true" />
+    <li class="lb-stage">
+      <h3 class="lb-stage-heading">Historical transmission</h3>
+      <p class="lb-stage-sub">
+        A contact stage, not an inventor step: Joachim Bouvet recognized the
+        arrangement's structure and sent it — he did not create it.
+      </p>
+      <ol class="lb-dates">
+        <li><span class="lb-date">4 Nov 1701</span> Bouvet sends Shao Yong's diagram in a letter to Leibniz.</li>
+        <li><span class="lb-date">1 Apr 1703</span> The letter reaches Leibniz.</li>
+      </ol>
+      <p class="lb-stage-sub">
+        {
+          examples.map(({ name, position }, i) => (
+            <>
+              {name} at {position}
+              {i < examples.length - 1 ? ", " : " "}
+            </>
+          ))
+        }
+        in that diagram's own layout (Xiantian arrangement, week 6) — the
+        positions are Bouvet's diagram's, not this figure's invention.
+      </p>
+    </li>
+    <li class="lb-connector" aria-hidden="true" />
+    <li class="lb-stage">
+      <h3 class="lb-stage-heading">Leibniz's reinterpretation</h3>
+      <p class="lb-stage-sub lb-stage-sub--prior">
+        Leibniz had already drafted binary arithmetic independently, by
+        1679 — before this diagram reached him.
+      </p>
+      <ul class="lb-examples">
+        {
+          examples.map(({ name, glyph, lines, digits, value }) => (
+            <li class="lb-example">
+              <LineStack lines={[...lines]} />
+              <span class="lb-example-label">
+                {glyph} {name}
+              </span>
+              <span class="lb-example-binary">
+                later binary reading: {digits.join("")} = {value}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="lb-stage-sub">
+        The same line patterns, read through his own binary-number
+        framework in 1703 — a reinterpretation of an existing notation, not
+        its source.
+      </p>
+    </li>
+  </ol>
+  <p class="lb-thesis">
+    A structural correspondence between two notations is not evidence that
+    one produced the other: <strong>structural correspondence &ne; historical
+    invention</strong>.
+  </p>
+  <figcaption>
+    Left to right is the order of interpretation, not a chain of invention —
+    the pre-existing notation was transmitted, then re-read through a
+    separate mathematical framework Leibniz already had.
+  </figcaption>
+</figure>
+
+<style>
+  .fig-leibniz-bouvet {
+    margin: 1.75rem 0;
+    padding: var(--at-spacing-lg);
+    border: 1px solid var(--at-divider);
+    border-radius: var(--at-border-radius);
+    background: var(--at-bg-elevated);
+  }
+
+  .lb-stages {
+    display: flex;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lb-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.75rem;
+    border: 1px solid var(--at-divider);
+    border-radius: var(--at-border-radius);
+    background: var(--at-bg-alt);
+  }
+
+  .lb-connector {
+    flex: 0 0 1.5rem;
+    align-self: center;
+    height: 2px;
+    background: var(--at-divider);
+  }
+
+  .lb-stage-heading {
+    margin: 0;
+    font-size: var(--at-font-size-h4);
+    color: var(--at-heading);
+  }
+
+  .lb-stage-sub {
+    margin: 0;
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text-muted);
+  }
+
+  .lb-stage-sub--prior {
+    padding: 0.4rem 0.5rem;
+    border: 1px dashed var(--at-divider);
+    border-radius: var(--at-border-radius);
+    color: var(--at-text);
+  }
+
+  .lb-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lb-example {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .lb-example-label {
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text);
+  }
+
+  .lb-example-binary {
+    font-family: var(--at-font-mono);
+    font-size: var(--at-font-size-xs);
+    color: var(--at-text-muted);
+  }
+
+  .lb-dates {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text);
+  }
+
+  .lb-date {
+    font-weight: 600;
+    color: var(--at-heading);
+    margin-right: 0.4rem;
+  }
+
+  .lb-thesis {
+    margin: 1.25rem 0 0;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--at-primary);
+    border-radius: var(--at-border-radius);
+    background: var(--at-bg);
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text);
+    text-align: center;
+  }
+
+  figcaption {
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--at-divider);
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text-muted);
+  }
+
+  @media (max-width: 45rem) {
+    .lb-stages {
+      flex-direction: column;
+    }
+
+    .lb-connector {
+      flex: 0 0 1.25rem;
+      align-self: flex-start;
+      margin-left: 0.75rem;
+      width: 2px;
+      height: 1.25rem;
+    }
+  }
+
+  @media (max-width: 26rem) {
+    .fig-leibniz-bouvet {
+      padding: var(--at-spacing-md);
+    }
+
+    .lb-stage {
+      padding: 0.6rem;
+    }
+  }
+</style>

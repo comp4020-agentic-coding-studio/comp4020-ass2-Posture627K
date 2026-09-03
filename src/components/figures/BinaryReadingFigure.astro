@@ -1,0 +1,164 @@
+---
+// Week 11 — a compact drill-down on one detail from LeibnizBouvetFigure:
+// four trigrams (not all eight — no 64-hexagram catalogue here), each
+// showing its traditional line pattern next to the later binary-count
+// reading from src/lib/leibnizBinary.ts, so the rule is visible without
+// building a full reference table.
+//
+// Qian and Kun are the reading's two documented endpoints (week 6: Kun = 0,
+// Qian = 7). Dui and Gen are the other two: deliberately an asymmetric pair
+// (110 and 001, not palindromes like Qian's 111 or Kun's 000) so the
+// examples actually exercise bottom-line-as-most-significant-bit — a
+// palindromic pattern reads the same with the bit order reversed and so
+// can't demonstrate the convention at all. Line data and the binary reading
+// both come from src/lib/trigrams.ts and src/lib/leibnizBinary.ts — nothing
+// here is re-derived or hard-coded.
+import LineStack from "./LineStack.astro";
+import { trigramInfo, type TrigramName } from "../../lib/trigrams";
+import { leibnizBinaryDigits, leibnizBinaryValue } from "../../lib/leibnizBinary";
+
+const EXAMPLES: TrigramName[] = ["Qian", "Kun", "Dui", "Gen"];
+const examples = EXAMPLES.map((name) => {
+  const { glyph, lines } = trigramInfo(name);
+  return { name, glyph, lines, digits: leibnizBinaryDigits(name), value: leibnizBinaryValue(name) };
+});
+---
+
+<figure class="fig fig-binary-reading">
+  <figcaption class="br-caption-top">
+    For this later binary reading, each digit lines up with its line: top
+    line first (least significant), down to the bottom line (most
+    significant).
+  </figcaption>
+  <ul class="br-examples">
+    {
+      examples.map(({ name, glyph, lines, digits, value }) => (
+        <li class="br-example">
+          <div class="br-column">
+            <span class="br-column-label">Traditional notation</span>
+            <span class="br-pair-label">
+              {glyph} {name}
+            </span>
+            <LineStack lines={[...lines]} />
+          </div>
+          <span class="br-arrow" aria-hidden="true">
+            →
+          </span>
+          <div class="br-column">
+            <span class="br-column-label">Later binary reading</span>
+            <span class="br-digits">
+              {digits.map((digit) => (
+                <span class="br-digit">{digit}</span>
+              ))}
+            </span>
+            <span class="br-decimal">= {value}</span>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</figure>
+
+<style>
+  .fig-binary-reading {
+    margin: 1.75rem 0;
+    padding: var(--at-spacing-lg);
+    border: 1px solid var(--at-divider);
+    border-radius: var(--at-border-radius);
+    background: var(--at-bg-elevated);
+  }
+
+  .br-caption-top {
+    margin: 0 0 1rem;
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text-muted);
+  }
+
+  .br-examples {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .br-example {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid var(--at-divider);
+    border-radius: var(--at-border-radius);
+    background: var(--at-bg-alt);
+  }
+
+  .br-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+
+  .br-column-label {
+    font-size: var(--at-font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--at-text-muted);
+    font-weight: 600;
+  }
+
+  .br-pair-label {
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text);
+  }
+
+  .br-arrow {
+    flex-shrink: 0;
+    color: var(--at-text-muted);
+  }
+
+  .br-digits {
+    display: inline-flex;
+    flex-direction: column-reverse;
+    gap: 0.3rem;
+  }
+
+  .br-digit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.1rem;
+    height: 0.65rem;
+    font-family: var(--at-font-mono);
+    font-size: var(--at-font-size-sm);
+    line-height: 1;
+    color: var(--at-text);
+  }
+
+  .br-decimal {
+    font-family: var(--at-font-mono);
+    font-size: var(--at-font-size-sm);
+    font-weight: 600;
+    color: var(--at-heading);
+  }
+
+  @media (max-width: 40rem) {
+    .br-examples {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 26rem) {
+    .fig-binary-reading {
+      padding: var(--at-spacing-md);
+    }
+
+    .br-example {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+</style>

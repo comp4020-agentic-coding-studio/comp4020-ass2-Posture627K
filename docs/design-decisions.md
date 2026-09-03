@@ -417,6 +417,44 @@ Register 2's secret-transmission note (Chen Tuan/Shao Yong/Cai Yuanding as
 inventors) has also been resolved against Louis directly, rather than left as
 an unverified lead — see the updated Register 2 entry above.
 
+## Phase 9 note — Week 11 Leibniz–Bouvet visual pass
+
+A read-only factual audit of `src/content/sessions/week-11.md` and
+`src/content/lectures/week-11.md`, checking that the page keeps four things
+separate (pre-existing notation, Bouvet's transmission role, Leibniz's binary
+interpretation, and the popular modern "binary computing" claim), found no
+correction needed: the page already states the 1679 independent draft before
+the 1701/1703 transmission, frames Bouvet as recognizing and sending an
+existing diagram rather than inventing anything, and explicitly names the
+popular one-liner as an overstatement of a narrower, contested exchange. No
+wording changed.
+
+That page adds two figures reusing `src/lib/trigrams.ts` and
+`src/lib/arrangements.ts`. The second figure needed a line-to-bit convention
+for reading a trigram as the "binary count" number from Phase 7 note item 3
+above — and no file in this repository states that convention as a bare
+numeric rule. Rather than assume one (yin=0/yang=1 is a common but unsourced
+default; either bit order is possible a priori), it was derived from two
+already-documented facts checked against each other:
+
+- `src/content/sessions/week-06.mdx` states the reading's two endpoints:
+  Kun = 0, Qian = 7.
+- François Louis, "The Genesis of an Icon" (2003), fig. 3, gives Shao Yong's
+  own full ordinal sequence — Qian 1, Dui 2, Li 3, Zhen 4, Xun 5, Kan 6,
+  Gen 7, Kun 8 — and the Phase 7 note above already documents the binary
+  reading as the exact reverse of that order.
+
+Testing yang=1/yin=0 against `src/lib/trigrams.ts`'s actual line data, the
+only bit-weight assignment that reproduces both the two endpoints and the
+full eight-value reversal is: bottom line = most significant (weight 4), top
+line = least significant (weight 1). That gives Kun=0, Gen=1, Kan=2, Xun=3,
+Zhen=4, Li=5, Dui=6, Qian=7 — exactly the reverse of the Louis sequence
+above, anchored at both documented endpoints. Encoded in
+`src/lib/leibnizBinary.ts` and checked against both source facts in
+`spec/leibniz-binary.test.ts`. This is a mechanical reading of two already-
+sourced facts, not a new historical claim, and is labelled in the figure as
+a later, Register 3 interpretation.
+
 ## Open questions for later phases
 
 - Whether week 3's "sixiang ambiguity" aside needs its own short page or
