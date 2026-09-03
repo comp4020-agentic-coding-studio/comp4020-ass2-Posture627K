@@ -36,7 +36,7 @@ are the ones already established in Phase 1's research, not new coinages.
 | 繫辭 | Xìcí | Xici — "Great Treatise"/"Appended Statements," one of the Ten Wings; source for the Taiji → Liangyi → Sixiang → Bagua sequence |
 | 太極圖 | Tàijítú | Taijitu — "diagram of the Taiji." Names more than one historical image (Zhou Dunyi's 11th-century five-tier diagram and the later swirling symbol) — never use as if it names a single fixed picture |
 | 太極圖說 | Tàijítú Shuō | Taijitu shuo — Zhou Dunyi's 11th-century text explaining his diagram |
-| 無極 | Wújí | Wuji — the tier above Taiji in Zhou Dunyi's diagram; "Non-Polar"/"Ultimateless" |
+| 無極 | Wújí | Wuji — "Non-Polar"/"Ultimateless"; paired with Taiji as one combined first tier (Wuji-er-Taiji, 無極而太極) in Zhou Dunyi's diagram, not a separate tier above it |
 | 太極拳 | Tàijíquán | Taijiquan / Tai Chi Chuan — the martial art (Chen Wangting era, ~17th century); named after the philosophical term, not its origin — don't conflate the two histories |
 
 Adding a new term follows the same rule as any other factual claim in this
@@ -69,11 +69,16 @@ Three evidence registers used throughout:
 - The *Shuogua zhuan* (Ten Wings) is the textual source assigning each
   trigram a direction, season, family role, and natural image — the raw
   material later systematized into named diagrams.
-- Zhou Dunyi (1017–1073), *Taijitu shuo*: a five-tier diagram of concentric
-  circles (Wuji → Taiji → yin-yang duality → Five Phases → the myriad
-  things) — **not** the swirling black-and-white symbol. Source: Joseph
-  Adler's translation (Kenyon College) of the *Taijitu shuo* with Zhu Xi's
-  commentary.
+- Zhou Dunyi (1017–1073), *Taijitu shuo*, as transmitted through Zhu Xi's
+  12th-century commentary (no autograph survives): a five-tier diagram —
+  Wuji-er-Taiji (無極而太極, combined as one tier) → yin-yang polarity (陽動
+  陰靜) → the Five Phases (水火木金土) → Qian becomes the male / Kun becomes
+  the female (乾道成男 / 坤道成女) → the myriad things (萬物化生) — **not**
+  the swirling black-and-white symbol. Sources: Joseph A. Adler (Kenyon
+  College), draft translations of the *Taijitu shuo* and of Zhu Xi's
+  commentary on it (source text: Zhang Boxing, comp., *Zhou Lianxi
+  xiansheng quanji*, 1708). Tier proportions/dimensions are not specified by
+  these sources and shouldn't be invented for a figure.
 - Shao Yong (1011–1077) built the Xiantian numerological system as a
   Song-dynasty construction, per Anne Birdwhistell, *Transition to
   Neo-Confucianism: Shao Yung on Knowledge and Symbols of Reality* (Stanford
@@ -88,10 +93,21 @@ Three evidence registers used throughout:
   live scholarly debate — present it as such. Do not add the "erroneous
   diagram" claim from an earlier draft of this research; it wasn't solidly
   sourced.
-- The swirling black-and-white taijitu is later than Zhou Dunyi's diagram,
-  with documented Ming-era diffusion (appearing in the Ming Daozang,
-  compiled 1445), reaching Western popular culture as "the yin-yang symbol"
-  in the 20th century.
+- The swirling black-and-white taijitu is later than, and historically
+  distinct from, Zhou Dunyi's diagram. François Louis, "The Genesis of an
+  Icon: The 'Taiji' Diagram's Early History" (*Harvard Journal of Asiatic
+  Studies* 63.1, 2003), argues the swirl motif and the xiantian trigram
+  circle were originally independent signs, combined only later — he states
+  the combined design is explicitly **absent** from both the 1415 *Xingli
+  daquan* and the 1444/1445 Daoist Canon (the earlier design-decisions draft
+  of this claim, that it appears "in the Ming Daozang, compiled 1445," was
+  wrong and has been removed). Textual evidence for the combination (Zhao
+  Huiqian's *Liushu benyi*, prefaces dated 1378/1380) points to the 14th
+  century, but the earliest surviving printed editions of that text date
+  only to 1517/1520 — Louis treats this as an open gap between textual claim
+  and surviving artifact, not a single confirmed origin date. The design
+  reached Western popular culture as "the yin-yang symbol" in the 20th
+  century.
 
 ### Register 2 — traditional or legendary attribution
 
@@ -103,12 +119,19 @@ Three evidence registers used throughout:
   as composite and accreted.
 - Confucius as author of the Ten Wings — traditional, not accepted as literal
   authorship by modern scholarship.
-- Specific Ming-dynasty naming of swirling-diagram variants (e.g. credited to
-  a 14th-century figure, simplified by a 16th-century one) — repeated across
-  secondary sources but not yet confirmed against the strongest available
-  peer-reviewed source (François Louis, "The Genesis of an Icon: The 'Taiji'
-  Diagram's Early History," 2003). Treat as a lead to verify against Louis
-  before teaching it as settled.
+- Traditional secret-transmission narratives credit the swirling taijitu's
+  origin to Song-dynasty or earlier Daoist adepts (e.g. Chen Tuan, via a
+  lineage said to lead to Shao Yong, for the trigram circle; Cai Yuanding
+  for the swirl circle, per Zhao Huiqian's own account) — François Louis,
+  "The Genesis of an Icon" (2003), reports this as a constructed pedigree
+  lacking textual support, and notes the Qing scholar Zhang Huiyan
+  (1761–1802) already rejected it, concluding instead that the diagrams grew
+  out of early-Ming scholars' own speculation. Do not present Chen Tuan or
+  Shao Yong as the swirl diagram's historical inventor, and do not extend
+  the swirling form itself back into the Song period — no securely
+  Song-dated artifact or text shows it. (This resolves the earlier note
+  here, which flagged this attribution as unverified against Louis; it has
+  now been checked against the source directly.)
 
 ### Register 3 — later interpretation or modern analogy
 
@@ -136,8 +159,8 @@ Three evidence registers used throughout:
 | Xiantian / Shao Yong | Anne Birdwhistell, *Transition to Neo-Confucianism* (Stanford UP, 1989); Zhu Xi's *Yixue qimeng* (1186, trans. Joseph Adler); Fung Yu-lan (trans. Derk Bodde), *A History of Chinese Philosophy* vol. II (Princeton UP) |
 | Houtian arrangement's exact positions | *Shuogua zhuan* ch. 5; Wilhelm/Baynes, Shuo Kua ch. 5 and arrangement diagram; James Legge, *The Yî King* (SBE vol. XVI), Appendix V and introduction comparison table |
 | Shao Yong's own numbering vs. the later binary-count reading | Franklin Perkins, *Leibniz and China* (Cambridge UP, 2004); *Journal of East-West Thought* Leibniz–Bouvet literature — the binary reading is a later, reversed reinterpretation, not Shao Yong's own order |
-| Zhou Dunyi's original Taijitu | Joseph Adler (Kenyon College), translation of the *Taijitu shuo* |
-| Swirling taijitu's emergence | François Louis, "The Genesis of an Icon" (2003) — verify Ming-era attribution details against this before teaching them |
+| Zhou Dunyi's transmitted Taijitu (via Zhu Xi) | Joseph A. Adler (Kenyon College), draft translations of the *Taijitu shuo* and of Zhu Xi's commentary on it (source text: Zhang Boxing, comp., *Zhou Lianxi xiansheng quanji*, 1708) |
+| Swirling taijitu's emergence | François Louis, "The Genesis of an Icon" (*HJAS* 63.1, 2003) — verified: independent origin from the xiantian trigram circle, absent from the 1415 *Xingli daquan* and the 1444/1445 Daoist Canon, earliest surviving combined text (Zhao Huiqian's *Liushu benyi*) only from 1517/1520 editions |
 | Leibniz–Bouvet | *Journal of East-West Thought* article; Franklin Perkins, *Leibniz and China* (Cambridge UP, 2004) |
 | Yin-yang as philosophical concept | Internet Encyclopedia of Philosophy, "Yinyang"; Stanford Encyclopedia of Philosophy |
 | Oracle bones / material culture | British Museum, Metropolitan Museum of Art collection records |
@@ -363,6 +386,36 @@ components share only arrangement-agnostic structural utilities
 abstraction, since Xiantian's and Houtian's respective notions of "opposite"
 are not the same relation (see the Phase 6 note above on the same category
 of mistake).
+
+## Phase 8 note — Week 10 Taijitu factual-correction pass
+
+A read-only historical-visual audit for week 10 (Zhou Dunyi's Taijitu vs. the
+later swirling symbol) found two factual errors in the material above, since
+corrected here and in `src/content/sessions/week-10.md` /
+`src/content/lectures/week-10.md`:
+
+1. **Zhou Dunyi's tier structure.** The prior five-tier list (Wuji → Taiji →
+   yin-yang duality → Five Phases → the myriad things) wrongly split the
+   single Wuji-er-Taiji tier into two, and omitted the fourth tier (Qian
+   becomes the male / Kun becomes the female) entirely. Corrected against
+   Joseph A. Adler's draft translations of the *Taijitu shuo* and of Zhu
+   Xi's commentary on it, cross-checked against François Louis's citation of
+   Needham's redrawing of the same diagram (Louis, "The Genesis of an Icon,"
+   2003). What's verified is the diagram as transmitted through Zhu Xi's
+   12th-century commentary (printed in an 1708 compilation) — no Zhou Dunyi
+   autograph survives, and this document doesn't claim one does.
+2. **The swirling taijitu's documented history.** The prior claim that it
+   appears "in the Ming Daozang, compiled 1445" was wrong: Louis states it
+   explicitly does **not** appear in either the 1415 *Xingli daquan* or the
+   1444/1445 Daoist Canon. The earliest textual combination of the swirl
+   circle with the xiantian trigrams is Zhao Huiqian's *Liushu benyi*
+   (prefaces dated 1378/1380), but the earliest surviving printed editions
+   are from 1517/1520 — a real gap between textual claim and surviving
+   artifact, kept open here rather than collapsed into one date.
+
+Register 2's secret-transmission note (Chen Tuan/Shao Yong/Cai Yuanding as
+inventors) has also been resolved against Louis directly, rather than left as
+an unverified lead — see the updated Register 2 entry above.
 
 ## Open questions for later phases
 

@@ -1,0 +1,370 @@
+---
+// Week 10 — the main historical-visual comparison: Zhou Dunyi's transmitted
+// five-tier Taijitu (left) against the later swirling taijitu (right), kept
+// side by side as two structurally different objects so the difference is
+// seen directly rather than read about. See docs/design-decisions.md's
+// Phase 8 note for the sourcing behind every label below; this comment only
+// records implementation decisions the source doesn't dictate.
+//
+// LEFT is a schematic reconstruction of the diagram as transmitted through
+// Zhu Xi's 12th-century commentary (Joseph A. Adler's translations) — no
+// Zhou Dunyi autograph survives, and this figure doesn't claim one does.
+// Tier proportions and the Five Phases tier's node layout are for
+// legibility only: the transmitted commentary's own left/right references
+// are ambiguous relative to the diagram's orientation and are not
+// reconstructed here, so tier 3 asserts only "five items, connected, not a
+// circle" — nothing about which phase sits where.
+//
+// RIGHT is a simplified explanatory SVG of the later swirling form (Ming
+// dynasty and after, per François Louis's "Genesis of an Icon"), not a
+// reproduction of any one surviving woodblock — surviving Ming/Qing
+// depictions differ from each other in exact curvature. The eight
+// surrounding trigrams reuse XIANTIAN_ARRANGEMENT from
+// src/lib/arrangements.ts (the arrangement Ming-era sources actually pair
+// the swirl with) and trigramInfo from src/lib/trigrams.ts — never
+// re-derived here.
+import LineStack from "./LineStack.astro";
+import { XIANTIAN_ARRANGEMENT, type CompassPosition } from "../../lib/arrangements";
+import { trigramInfo } from "../../lib/trigrams";
+
+interface Tier {
+  key: string;
+  kind: "circle" | "divided" | "cluster";
+  label: string;
+  gloss: string;
+}
+
+const tiers: Tier[] = [
+  {
+    key: "wuji-taiji",
+    kind: "circle",
+    label: "無極而太極",
+    gloss: 'Wuji-er-Taiji — "Non-Polar, and yet Supreme Polarity": one combined first tier, not two.',
+  },
+  {
+    key: "yinyang",
+    kind: "divided",
+    label: "陽動陰靜",
+    gloss: "Yang in activity, yin in stillness — a static two-part division, not the later swirl.",
+  },
+  {
+    key: "five-phases",
+    kind: "cluster",
+    label: "水火木金土",
+    gloss: "The Five Phases — Water, Fire, Wood, Metal, Earth — break the circle pattern here.",
+  },
+  {
+    key: "qian-kun",
+    kind: "circle",
+    label: "乾道成男 / 坤道成女",
+    gloss: "The Way of Qian becomes the male, the Way of Kun becomes the female.",
+  },
+  {
+    key: "myriad-things",
+    kind: "circle",
+    label: "萬物化生",
+    gloss: "The transformation and generation of the myriad things.",
+  },
+];
+
+const trigramNodes = XIANTIAN_ARRANGEMENT.map(({ trigram, position }) => ({
+  ...trigramInfo(trigram),
+  position,
+}));
+
+function gridArea(position: CompassPosition): string {
+  return position.toLowerCase();
+}
+---
+
+<figure class="fig fig-taijitu-comparison">
+  <div class="tc-columns">
+    <div class="tc-column">
+      <h3 class="tc-column-heading">Zhou Dunyi's transmitted Taijitu</h3>
+      <p class="tc-column-sub">
+        11th century, as transmitted through Zhu Xi's 12th-century
+        commentary — vertically staged, five discrete tiers.
+      </p>
+      <ol class="tc-tiers">
+        {
+          tiers.map((tier) => (
+            <li class="tc-tier">
+              <span class="tc-tier-figure" aria-hidden="true">
+                {tier.kind === "circle" && (
+                  <svg viewBox="0 0 40 40">
+                    <circle cx="20" cy="20" r="17" class="tc-plain-circle" />
+                  </svg>
+                )}
+                {tier.kind === "divided" && (
+                  <svg viewBox="0 0 40 40">
+                    <circle cx="20" cy="20" r="17" class="tc-divided-a" />
+                    <path d="M20,3 A17,17 0 0,1 20,37 Z" class="tc-divided-b" />
+                  </svg>
+                )}
+                {tier.kind === "cluster" && (
+                  <svg viewBox="0 0 40 40">
+                    <line x1="20" y1="20" x2="20" y2="6" class="tc-phase-link" />
+                    <line x1="20" y1="20" x2="34" y2="20" class="tc-phase-link" />
+                    <line x1="20" y1="20" x2="20" y2="34" class="tc-phase-link" />
+                    <line x1="20" y1="20" x2="6" y2="20" class="tc-phase-link" />
+                    <circle cx="20" cy="20" r="4" class="tc-phase-node" />
+                    <circle cx="20" cy="6" r="4" class="tc-phase-node" />
+                    <circle cx="34" cy="20" r="4" class="tc-phase-node" />
+                    <circle cx="20" cy="34" r="4" class="tc-phase-node" />
+                    <circle cx="6" cy="20" r="4" class="tc-phase-node" />
+                  </svg>
+                )}
+              </span>
+              <span class="tc-tier-text">
+                <span class="tc-tier-label">{tier.label}</span>
+                <span class="tc-tier-gloss">{tier.gloss}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <div class="tc-column">
+      <h3 class="tc-column-heading">The later swirling taijitu</h3>
+      <p class="tc-column-sub">
+        Ming dynasty and after — a single continuous circular image, a
+        different historical object, not a redrawing of Zhou Dunyi's
+        diagram.
+      </p>
+      <div class="tc-swirl-frame">
+        <svg class="tc-swirl" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <circle cx="50" cy="50" r="49" class="tc-swirl-base" />
+          <path
+            class="tc-swirl-fill"
+            d="M50,0 A50,50 0 0,1 50,100 A25,25 0 0,1 50,50 A25,25 0 0,0 50,0 Z"
+          />
+          <circle cx="50" cy="25" r="6" class="tc-swirl-dot tc-swirl-dot--a" />
+          <circle cx="50" cy="75" r="6" class="tc-swirl-dot tc-swirl-dot--b" />
+        </svg>
+        <ol class="tc-trigram-ring">
+          {
+            trigramNodes.map(({ name, glyph, lines, position }) => (
+              <li class="tc-trigram-node" style={`grid-area: ${gridArea(position)}`}>
+                <LineStack lines={[...lines]} />
+                <span class="tc-trigram-label">
+                  {glyph} {name}
+                </span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+      <p class="tc-trigram-note">
+        Surrounding trigrams: the Xiantian arrangement (week 6) — the one
+        Ming-era sources actually pair the swirl with, not an arrangement
+        chosen for this figure.
+      </p>
+    </div>
+  </div>
+  <figcaption>
+    Same name, two different objects: Zhou Dunyi's diagram is read stage by
+    stage; the later swirl is read as one continuous whole. Neither is a
+    redrawing of the other.
+  </figcaption>
+</figure>
+
+<style>
+  .fig-taijitu-comparison {
+    margin: 1.75rem 0;
+    padding: var(--at-spacing-lg);
+    border: 1px solid var(--at-divider);
+    border-radius: var(--at-border-radius);
+    background: var(--at-bg-elevated);
+  }
+
+  .tc-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .tc-column-heading {
+    margin: 0 0 0.25rem;
+    font-size: var(--at-font-size-h4);
+    color: var(--at-heading);
+  }
+
+  .tc-column-sub {
+    margin: 0;
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text-muted);
+  }
+
+  .tc-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 0.85rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tc-tier {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--at-divider);
+    border-radius: var(--at-border-radius);
+    background: var(--at-bg-alt);
+  }
+
+  .tc-tier-figure svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .tc-plain-circle {
+    fill: var(--at-bg);
+    stroke: var(--at-primary);
+    stroke-width: 2;
+  }
+
+  .tc-divided-a {
+    fill: var(--at-bg);
+    stroke: var(--at-primary);
+    stroke-width: 2;
+  }
+
+  .tc-divided-b {
+    fill: var(--at-text);
+  }
+
+  .tc-phase-link {
+    stroke: var(--at-text-muted);
+    stroke-width: 1.5;
+  }
+
+  .tc-phase-node {
+    fill: var(--at-bg);
+    stroke: var(--at-primary);
+    stroke-width: 2;
+  }
+
+  .tc-tier-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .tc-tier-label {
+    font-weight: 600;
+    color: var(--at-text);
+  }
+
+  .tc-tier-gloss {
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text-muted);
+  }
+
+  .tc-swirl-frame {
+    position: relative;
+    width: min(100%, 20rem);
+    aspect-ratio: 1;
+    margin: 1.25rem auto 0.75rem;
+  }
+
+  .tc-swirl {
+    position: absolute;
+    inset: 20%;
+    z-index: 0;
+    display: block;
+  }
+
+  .tc-swirl-base {
+    fill: var(--at-text);
+  }
+
+  .tc-swirl-fill {
+    fill: var(--at-bg);
+  }
+
+  .tc-swirl-dot--a {
+    fill: var(--at-text);
+  }
+
+  .tc-swirl-dot--b {
+    fill: var(--at-bg);
+  }
+
+  .tc-trigram-ring {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      "se s sw"
+      "e . w"
+      "ne n nw";
+    width: 100%;
+    height: 100%;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tc-trigram-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+
+  .tc-trigram-label {
+    font-size: 0.65rem;
+    color: var(--at-text-muted);
+    white-space: nowrap;
+  }
+
+  .tc-trigram-note {
+    margin: 0;
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text-muted);
+    text-align: center;
+  }
+
+  figcaption {
+    margin-top: 1.25rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--at-divider);
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text-muted);
+  }
+
+  @media (max-width: 40rem) {
+    .tc-columns {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+  }
+
+  @media (max-width: 26rem) {
+    .fig-taijitu-comparison {
+      padding: var(--at-spacing-md);
+    }
+
+    .tc-tier {
+      padding: 0.4rem 0.5rem;
+    }
+
+    .tc-tier-figure svg {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .tc-trigram-label {
+      font-size: 0.6rem;
+    }
+  }
+</style>

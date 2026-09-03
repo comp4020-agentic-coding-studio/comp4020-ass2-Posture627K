@@ -14,8 +14,9 @@ changing visual form did to how the idea was communicated.
 
 ## Outline
 
-- Zhou Dunyi's five-tier Taijitu (*Taijitu shuo*, 1017–1073): Wuji, Taiji,
-  yin-yang, the Five Phases, the myriad things
+- Zhou Dunyi's five-tier Taijitu (*Taijitu shuo*, 1017–1073, as transmitted
+  through Zhu Xi's commentary): Wuji-er-Taiji (combined), yin-yang polarity,
+  the Five Phases, Qian/Kun male-female, the myriad things
 - the later swirling black-and-white symbol and its Ming-era diffusion
 - how the redesigned form changed what the sign made easy to see, and what
   it made disappear

@@ -1,0 +1,196 @@
+---
+// Week 10 — the evidence timeline for the later swirling taijitu. The point
+// is not a single origin date; it's that "claimed origin," "surviving
+// evidence," and "later diffusion" are three different questions with three
+// different answers here. Every milestone and date below is drawn directly
+// from docs/design-decisions.md's Register 1 entry and Phase 8 note
+// (François Louis, "The Genesis of an Icon," HJAS 63.1, 2003) — nothing here
+// is a new claim. Where the source gives only "12th century" rather than a
+// specific year (Zhu Xi's commentary), this keeps it that vague rather than
+// inventing precision the source doesn't support.
+interface Milestone {
+  key: string;
+  type: "context" | "transmitted" | "textual" | "gap" | "surviving" | "diffusion";
+  typeLabel: string;
+  date: string;
+  text: string;
+}
+
+const milestones: Milestone[] = [
+  {
+    key: "zhou-dunyi",
+    type: "context",
+    typeLabel: "Historical context",
+    date: "1017–1073",
+    text: "Zhou Dunyi's lifetime, author of the Taijitu shuo. No autograph diagram survives.",
+  },
+  {
+    key: "zhu-xi",
+    type: "transmitted",
+    typeLabel: "Transmitted / redacted form",
+    date: "12th century",
+    text: "Zhu Xi's commentary transmits the five-tier diagram this course teaches — the form that survives, not Zhou Dunyi's own hand.",
+  },
+  {
+    key: "zhao-huiqian-preface",
+    type: "textual",
+    typeLabel: "Textual claim",
+    date: "1378 / 1380",
+    text: "Zhao Huiqian's Liushu benyi is prefaced, combining the swirl motif with the xiantian trigram circle — the earliest textual claim for that combination.",
+  },
+  {
+    key: "absent-from-canon",
+    type: "gap",
+    typeLabel: "Checked — absent",
+    date: "1415 / 1444–1445",
+    text: "The combined design is explicitly absent from both the Xingli daquan (1415) and the Ming Daoist Canon (1444/1445) — a real evidentiary gap, not an oversight.",
+  },
+  {
+    key: "surviving-print",
+    type: "surviving",
+    typeLabel: "Surviving print evidence",
+    date: "1517 / 1520",
+    text: "Earliest surviving printed editions of the Liushu benyi that actually carry the combined design.",
+  },
+  {
+    key: "diffusion",
+    type: "diffusion",
+    typeLabel: "Later reception / diffusion",
+    date: "Ming–Qing onward",
+    text: 'Continued circulation through the Ming and Qing, reaching global popular culture as "the yin-yang symbol" only much later.',
+  },
+];
+---
+
+<figure class="fig fig-taijitu-timeline">
+  <figcaption class="et-caption-top">
+    Claimed origin, surviving evidence, and later diffusion are three
+    different questions — this timeline keeps them separate rather than
+    collapsing them into one confirmed date.
+  </figcaption>
+  <ol class="et-milestones">
+    {
+      milestones.map((milestone, i) => (
+        <>
+          <li class={`et-milestone et-milestone--${milestone.type}`}>
+            <span class="et-marker" aria-hidden="true" />
+            <span class="et-type-badge">{milestone.typeLabel}</span>
+            <span class="et-date">{milestone.date}</span>
+            <span class="et-text">{milestone.text}</span>
+          </li>
+          {i < milestones.length - 1 && <li class="et-connector" aria-hidden="true" />}
+        </>
+      ))
+    }
+  </ol>
+</figure>
+
+<style>
+  .fig-taijitu-timeline {
+    margin: 1.75rem 0;
+    padding: var(--at-spacing-lg);
+    border: 1px solid var(--at-divider);
+    border-radius: var(--at-border-radius);
+    background: var(--at-bg-elevated);
+  }
+
+  .et-caption-top {
+    margin: 0 0 1rem;
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text-muted);
+  }
+
+  .et-milestones {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .et-milestone {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.75rem;
+    border: 1px solid var(--at-divider);
+    border-radius: var(--at-border-radius);
+    background: var(--at-bg-alt);
+  }
+
+  .et-connector {
+    flex: 0 0 1.5rem;
+    align-self: center;
+    height: 2px;
+    background: var(--at-divider);
+  }
+
+  .et-marker {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: var(--at-primary);
+  }
+
+  .et-milestone--gap {
+    border-style: dashed;
+    background: var(--at-warning-soft);
+  }
+
+  .et-milestone--gap .et-marker {
+    background: transparent;
+    border: 2px solid var(--at-text-muted);
+    width: calc(0.65rem - 4px);
+    height: calc(0.65rem - 4px);
+  }
+
+  .et-milestone--surviving {
+    border-width: 2px;
+    border-color: var(--at-primary);
+  }
+
+  .et-type-badge {
+    font-size: var(--at-font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--at-text-muted);
+    font-weight: 600;
+  }
+
+  .et-date {
+    font-weight: 600;
+    color: var(--at-heading);
+  }
+
+  .et-text {
+    font-size: var(--at-font-size-sm);
+    color: var(--at-text);
+  }
+
+  @media (max-width: 45rem) {
+    .et-milestones {
+      flex-direction: column;
+    }
+
+    .et-connector {
+      flex: 0 0 1.25rem;
+      align-self: flex-start;
+      margin-left: 0.75rem;
+      width: 2px;
+      height: 1.25rem;
+    }
+  }
+
+  @media (max-width: 26rem) {
+    .fig-taijitu-timeline {
+      padding: var(--at-spacing-md);
+    }
+
+    .et-milestone {
+      padding: 0.6rem;
+    }
+  }
+</style>
