@@ -11,3 +11,465 @@
  * slide class you reach for (`_class: quote`), a code-heavy layout, a
  * background. */
 @import url("astro-theme-university/styles/deck.css");
+
+/* Week 1 deck-native visuals (course orientation + "Signs That Move").
+ * Ticks/bars carry no text of their own — labels live in a legend below,
+ * the same split CourseArc/AssessmentsGrid use, so a narrow flex segment
+ * never has to fit a sentence. */
+
+.deck-arc-ticks,
+.deck-roadmap-bar {
+  display: flex;
+  gap: 0.3rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.deck-arc-ticks li {
+  flex: 1 1 0;
+  height: 2rem;
+  border-radius: 0.2rem;
+}
+
+.deck-roadmap-bar li {
+  height: 1.5rem;
+  border-radius: 0.2rem;
+}
+
+.deck-roadmap-bar li.deck-roadmap--grow-1 {
+  flex-grow: 1;
+}
+.deck-roadmap-bar li.deck-roadmap--grow-2 {
+  flex-grow: 2;
+}
+.deck-roadmap-bar li.deck-roadmap--grow-3 {
+  flex-grow: 3;
+}
+.deck-roadmap-bar li.deck-roadmap--grow-4 {
+  flex-grow: 4;
+}
+
+.deck-arc--framing,
+.deck-roadmap--framing {
+  background: var(--at-tertiary);
+}
+.deck-arc--building,
+.deck-roadmap--building {
+  background: var(--at-primary);
+}
+.deck-arc--history,
+.deck-roadmap--history {
+  background: var(--at-secondary);
+}
+
+.deck-arc--start {
+  border-inline-start: 2px dashed var(--at-bg);
+}
+
+.deck-arc-legend,
+.deck-roadmap-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1.4rem;
+}
+
+.deck-arc-legend li,
+.deck-roadmap-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.deck-arc-legend li::before,
+.deck-roadmap-legend li::before {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  border-radius: 0.2rem;
+}
+
+.deck-arc-legend li.deck-arc--framing::before,
+.deck-roadmap-legend li.deck-roadmap--framing::before {
+  background: var(--at-tertiary);
+}
+.deck-arc-legend li.deck-arc--building::before,
+.deck-roadmap-legend li.deck-roadmap--building::before {
+  background: var(--at-primary);
+}
+.deck-arc-legend li.deck-arc--history::before,
+.deck-roadmap-legend li.deck-roadmap--history::before {
+  background: var(--at-secondary);
+}
+
+/* Assessment weight bar: same proportional-fill idea as AssessmentsGrid's
+ * .weight-stack, expressed as two fixed classes instead of an inline
+ * flex-grow, since deck.mdx has no precedent for computed inline styles. */
+
+.deck-weight-bar {
+  display: flex;
+  gap: 0.2rem;
+  margin: 0 0 1.5rem;
+}
+
+.deck-weight-segment {
+  padding: 1rem;
+  border-radius: var(--at-border-radius);
+  color: var(--at-on-primary);
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.deck-weight-segment--assignment {
+  flex: 2 1 0;
+  background: var(--at-primary);
+}
+
+.deck-weight-segment--project {
+  flex: 3 1 0;
+  background: var(--at-secondary);
+}
+
+/* Teaching-team roster */
+
+.deck-roster {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.deck-person {
+  padding: 1.25rem;
+  border: 1px solid var(--at-divider);
+  border-radius: var(--at-border-radius);
+}
+
+.deck-person-name {
+  margin: 0;
+  font-size: 1.8rem;
+  color: var(--at-heading);
+}
+
+.deck-person-role {
+  margin: 0.15rem 0 0.75rem;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--at-text-muted);
+}
+
+.deck-person p:last-child {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+/* Four learning-outcome themes */
+
+.deck-themes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.deck-theme {
+  padding: 1.25rem;
+  border: 1px solid var(--at-divider);
+  border-radius: var(--at-border-radius);
+}
+
+.deck-theme h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.7rem;
+  color: var(--at-heading);
+}
+
+.deck-theme p {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--at-text-muted);
+}
+
+/* State / change contrast */
+
+.deck-contrast {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.deck-contrast-box {
+  padding: 1.5rem 2.5rem;
+  border: 1px solid var(--at-divider);
+  border-radius: var(--at-border-radius);
+  text-align: center;
+}
+
+.deck-contrast-label {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--at-text-muted);
+}
+
+.deck-contrast-value {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--at-heading);
+}
+
+.deck-contrast-vs {
+  margin: 0;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--at-text-muted);
+}
+
+/* Traffic light */
+
+.deck-signal {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.deck-signal-lamps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.75rem;
+  border-radius: var(--at-border-radius);
+  background: var(--at-bg-elevated, rgba(0, 0, 0, 0.25));
+}
+
+.deck-lamp {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  opacity: 0.25;
+}
+
+.deck-lamp--lit {
+  opacity: 1;
+}
+
+.deck-lamp--red {
+  background: #dc2626;
+}
+.deck-lamp--amber {
+  background: #d97706;
+}
+.deck-lamp--green {
+  background: #16a34a;
+}
+
+.deck-signal-rule {
+  max-width: 24rem;
+  font-size: 1.4rem;
+  color: var(--at-text-muted);
+}
+
+/* Title-slide motif: a single line growing into stacked lines. Compact on
+ * purpose (title slide already carries a lot of text) — not the same shape
+ * as .deck-sequence below, so the two don't read as the same idea. */
+
+.deck-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.deck-line-bar {
+  display: block;
+  height: 0.6rem;
+  border-radius: 0.3rem;
+  background: var(--at-primary);
+}
+
+.deck-line-bar:nth-child(1) {
+  width: 8rem;
+}
+.deck-line-bar:nth-child(2) {
+  width: 12rem;
+}
+.deck-line-bar:nth-child(3) {
+  width: 16rem;
+}
+
+/* Abstract musical sequence: height-only marks, no notation reproduced */
+
+.deck-sequence {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  height: 8rem;
+}
+
+.deck-note {
+  display: block;
+  width: 1.5rem;
+  border-radius: 0.2rem;
+  background: var(--at-primary);
+}
+
+.deck-note--h1 {
+  height: 3rem;
+}
+.deck-note--h2 {
+  height: 5rem;
+}
+.deck-note--h3 {
+  height: 7rem;
+}
+.deck-note--h4 {
+  height: 4.5rem;
+}
+
+/* Generic node chain: state machine, binary flip */
+
+.deck-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.deck-chain-node {
+  min-width: 4rem;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--at-primary);
+  border-radius: var(--at-border-radius);
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.deck-chain-arrow {
+  font-size: 2rem;
+  color: var(--at-text-muted);
+}
+
+/* Three-question grid */
+
+.deck-questions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.deck-questions li {
+  padding: 1.25rem;
+  border: 1px solid var(--at-divider);
+  border-radius: var(--at-border-radius);
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+/* External historical images: a bordered card matching .deck-person /
+ * .deck-theme, with a caption slot for the required on-slide source line.
+ * Full provenance lives in speaker notes, never here --- this line stays
+ * short by design. */
+
+.deck-with-image {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.deck-image {
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--at-divider);
+  border-radius: var(--at-border-radius);
+}
+
+.deck-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: calc(var(--at-border-radius) - 0.2rem);
+}
+
+.deck-image figcaption {
+  margin-top: 0.75rem;
+  font-size: 1.15rem;
+  color: var(--at-text-muted);
+}
+
+/* Modifier for use on a flat brand-colour slide (e.g. `_class: impact`),
+ * where --at-text-muted is tuned for the dark deck background and reads
+ * poorly --- and where the image is a small teaser, not a supporting card
+ * beside body text. */
+
+.deck-image--teaser {
+  max-width: 22rem;
+  margin: 2rem auto 0;
+  border-color: var(--at-on-primary);
+  opacity: 0.92;
+}
+
+.deck-image--teaser figcaption {
+  color: var(--at-on-primary);
+}
+
+/* Cover slide: title/text on the left, the Taiji-and-eight-trigrams course
+ * motif on the right at roughly 38% of the slide's width — narrower than
+ * .deck-with-image's 1fr, since the motif is identity decoration, not
+ * content to read. Positions and line patterns come from the same verified
+ * Xiantian data src/decks/week-01.deck.mdx computes coverMotifNodes from
+ * (src/lib/arrangements.ts, src/lib/trigrams.ts) --- this file only styles
+ * the SVG shapes, it never invents a position. */
+
+.deck-cover {
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.deck-cover-motif svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.deck-motif-ring {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.75;
+  opacity: 0.25;
+}
+
+.deck-motif-taiji {
+  fill: currentColor;
+  stroke: var(--at-primary);
+  stroke-width: 1.5;
+}
+
+.deck-motif-taiji-swirl {
+  fill: var(--r-background-color);
+}
+
+.deck-motif-trigram rect {
+  fill: currentColor;
+}

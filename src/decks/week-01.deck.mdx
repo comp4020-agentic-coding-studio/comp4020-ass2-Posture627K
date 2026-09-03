@@ -1,31 +1,270 @@
 ---
 title: Signs That Move
 description:
-  Framing the course's central question through three familiar sign systems,
-  before any course-specific notation arrives
+  Course orientation, then framing the course's central question through
+  four familiar sign systems, before any course-specific notation arrives
 ---
 
-{/* _class: impact */}
+import hexagramPlate from "./assets/week-01/hexagram-plate-legge.jpg";
+import { XIANTIAN_ARRANGEMENT } from "../lib/arrangements";
+import { trigramInfo } from "../lib/trigrams";
 
-# Signs That Move
+export const COVER_MOTIF_ORDER = ["S", "SW", "W", "NW", "N", "NE", "E", "SE"];
 
-Framing the question
+export const coverMotifNodes = XIANTIAN_ARRANGEMENT.map(({ trigram, position }) => {
+  const angleDeg = (COVER_MOTIF_ORDER.indexOf(position) * 360) / 8;
+  const angleRad = (angleDeg * Math.PI) / 180;
+  const radius = 98;
+  return {
+    lines: trigramInfo(trigram).lines,
+    cx: 130 + radius * Math.sin(angleRad),
+    cy: 130 - radius * Math.cos(angleRad),
+  };
+});
+
+<div class="deck-cover">
+  <div class="deck-cover-text">
+
+# SLOP2462
+
+## Patterns of Change: Taiji, Bagua, and the Visual Logic of Transformation
+
+Semester 1, 2027
+
+<div class="deck-lines">
+  <span class="deck-line-bar"></span>
+  <span class="deck-line-bar"></span>
+  <span class="deck-line-bar"></span>
+</div>
+
+**How can a small set of visual symbols represent change and transformation?**
+
+  </div>
+  <div class="deck-cover-motif">
+    <svg viewBox="0 0 260 260" role="img" aria-label="Taiji surrounded by the eight trigrams">
+      <circle class="deck-motif-ring" cx="130" cy="130" r="98" />
+      <circle class="deck-motif-taiji" cx="130" cy="130" r="44" />
+      <path
+        class="deck-motif-taiji-swirl"
+        d="M130,86 A44,44 0 0,1 130,174 A22,22 0 0,1 130,130 A22,22 0 0,0 130,86 Z"
+      />
+      {coverMotifNodes.map(({ lines, cx, cy }) => (
+        <g class="deck-motif-trigram" transform={`translate(${cx} ${cy})`}>
+          {lines.map((value, index) => {
+            const barY = (1 - index) * 9 - 2.5;
+            return value === "yang" ? (
+              <rect x="-13" y={barY} width="26" height="5" />
+            ) : (
+              <>
+                <rect x="-13" y={barY} width="11" height="5" />
+                <rect x="2" y={barY} width="11" height="5" />
+              </>
+            );
+          })}
+        </g>
+      ))}
+    </svg>
+  </div>
+</div>
 
 ```notes
-Week 1, lecture 1. No course-specific notation appears today — that starts
-next week. Today is entirely about the question the rest of the semester
-answers.
+Welcome. Say the course code and title once, clearly, then move straight to
+the central question — it is the thread for all twelve weeks. The three
+growing bars are a placeholder for "a single line building into something
+larger" — don't explain them as anything more specific than that yet.
+
+Cover motif: Taiji and the eight trigrams, in the verified Xiantian
+arrangement (src/lib/arrangements.ts). This is a course-identity graphic,
+not a claim that this exact combined diagram is one historical artifact —
+don't present it as "the original Taijitu" or an ancient composite diagram.
+```
+
+---
+
+## What is SLOP2462?
+
+<blockquote>
+  <p>
+    A semiotics course on how a small set of visual signs can encode
+    change itself, not just static categories.
+  </p>
+</blockquote>
+
+<ul>
+  <li>how a small visual vocabulary builds into a larger notation</li>
+  <li>
+    how such a notation encodes transformation, not only static states
+  </li>
+  <li>
+    how interpretation of that notation accumulates and shifts across
+    history
+  </li>
+</ul>
+
+```notes
+Keep this to the description already on the course's own pages — the point
+is "sign systems and change," not a survey of Chinese philosophy. That
+distinction matters for how you should read every week that follows.
+
+This slide previously showed a Smithsonian "Bowl with eight trigrams" image
+(F1995.8) here. Removed during final submission preflight: the object's
+rights status is "Usage Conditions Apply," and while the Smithsonian's terms
+of use permit non-commercial educational display with attribution, they only
+state a preference to link to the Smithsonian's own hosting rather than
+explicitly clearing rehosting a copied file on an external public site —
+that specific case isn't addressed either way, so it doesn't clear the bar
+of clearly-permitted redistribution. Do not re-add this or another
+Smithsonian "Usage Conditions Apply" image without an explicit rights
+clearance.
+```
+
+---
+
+## Teaching team
+
+<div class="deck-roster">
+  <div class="deck-person">
+    <p class="deck-person-name">Marisol Quaye</p>
+    <p class="deck-person-role">Convenor</p>
+    <p>
+      Designed the course's twelve-week progression and its evidence-register
+      discipline. Teaches most sessions and reads every submission at least
+      once.
+    </p>
+  </div>
+  <div class="deck-person">
+    <p class="deck-person-name">Idris Fenn</p>
+    <p class="deck-person-role">Tutor</p>
+    <p>
+      Runs the small-group construction work in the first half of semester,
+      and marks Assignment 1.
+    </p>
+  </div>
+</div>
+
+```notes
+Marisol is Convenor, not "professor" — that is the title the course actually
+uses, so use it. Two people, two clearly different jobs: designs/teaches vs.
+runs sessions/marks Assignment 1. No photos, no invented office-hours slot.
+```
+
+---
+
+## What you will learn
+
+<div class="deck-themes">
+  <div class="deck-theme">
+    <h3>Construct</h3>
+    <p>Line → bigram → trigram → hexagram</p>
+  </div>
+  <div class="deck-theme">
+    <h3>Transform</h3>
+    <p>Explain how structural change is encoded, not just described</p>
+  </div>
+  <div class="deck-theme">
+    <h3>Compare &amp; evaluate</h3>
+    <p>Arrangements, historical claims, modern interpretations</p>
+  </div>
+  <div class="deck-theme">
+    <h3>Transfer</h3>
+    <p>Apply the toolkit to a sign system this course never covered</p>
+  </div>
+</div>
+
+```notes
+Four themes, six outcomes underneath: Construct = outcome 1. Transform =
+outcome 2. Compare & evaluate = outcomes 3, 4, and 5 (arrangement
+comparison, fact/attribution/reinterpretation, evaluating a modern claim).
+Transfer = outcome 6. Use the grouping to talk, but the six are what's
+actually assessed.
+```
+
+---
+
+## How the 12 weeks fit together
+
+<ol class="deck-arc-ticks">
+  <li class="deck-arc--framing"></li>
+  <li class="deck-arc--building deck-arc--start"></li>
+  <li class="deck-arc--building"></li>
+  <li class="deck-arc--building"></li>
+  <li class="deck-arc--building"></li>
+  <li class="deck-arc--building"></li>
+  <li class="deck-arc--building"></li>
+  <li class="deck-arc--building"></li>
+  <li class="deck-arc--history deck-arc--start"></li>
+  <li class="deck-arc--history"></li>
+  <li class="deck-arc--history"></li>
+  <li class="deck-arc--history"></li>
+</ol>
+
+<ul class="deck-arc-legend">
+  <li class="deck-arc--framing">Framing — week 1</li>
+  <li class="deck-arc--building">Building the notation — weeks 2–8</li>
+  <li class="deck-arc--history">Historical reception — weeks 9–12</li>
+</ul>
+
+Today sits entirely inside the first band.
+
+```notes
+Three phases, not four — framing (this week only), building the notation
+(weeks 2–8, where most construction happens), historical reception (weeks
+9–12, where interpretation and sourcing discipline take over).
+```
+
+---
+
+## Assessment
+
+<div class="deck-weight-bar">
+  <div class="deck-weight-segment deck-weight-segment--assignment">Assignment 1 — 40%</div>
+  <div class="deck-weight-segment deck-weight-segment--project">Final project — 60%</div>
+</div>
+
+| Category | Assignment 1 | Final project |
+|---|---|---|
+| Weight | 40% | 60% |
+| Due | Week 8 · 12 April 2027 | Week 12 · 28 May 2027 |
+| Demonstrates | Construction, the changing-line rule, arrangement comparison | Evaluating a modern claim; transferring the toolkit to a new sign system |
+
+```notes
+Two pieces of work, both cumulative. Assignment 1 is due right when the
+building phase ends; the final project is due at the very end and asks
+students to leave the course's own sign system behind for one section of it.
+```
+
+---
+
+## Exam & how the course works
+
+No separate exam is listed. Assignment 1 and the Final project together
+make up 100% of the assessment.
+
+- **Lectures** — concepts and examples
+- **Sessions** — weekly guided, practical work
+- **Assessments** — briefs and submission expectations
+- **People** — teaching-team information
+- **Policies** — course rules and expectations
+
+```notes
+Say the exam line plainly and move on — it's a fact about this course's
+assessment, not a policy to editorialise. Transition: now that the logistics
+are clear, switch from how the course works to the question the course is
+built around.
 ```
 
 ---
 
 {/* _class: impact */}
 
-# What does a sign system need, in order to represent *change* — not just a fixed state?
+# Signs That Move
+
+## What does a sign system need, in order to represent *change* — not just a fixed state?
 
 ```notes
-Sit with this. Don't answer it yet — the rest of the deck is the setup, and
-the answer doesn't arrive until week 8.
+This is the pivot from orientation to lecture. Sit with the question — don't
+answer it yet. No course-specific notation appears today; that starts next
+week. Today is entirely about the question the rest of the semester answers.
 ```
 
 ---
@@ -37,79 +276,217 @@ Most notations are good at **naming** something: a state, a pitch, a value.
 Few are built, from the ground up, to represent **a state becoming another
 state** — inside the notation itself, not described around it.
 
-That distinction is what today's three cases test.
+<div class="deck-contrast">
+  <div class="deck-contrast-box">
+    <p class="deck-contrast-label">State</p>
+    <p class="deck-contrast-value">A</p>
+  </div>
+  <p class="deck-contrast-vs">versus</p>
+  <div class="deck-contrast-box">
+    <p class="deck-contrast-label">Change</p>
+    <p class="deck-contrast-value">A → B</p>
+  </div>
+</div>
+
+```notes
+No course-specific notation yet. The contrast is the whole point: naming a
+state is easy, representing a transition inside the sign itself is rare.
+```
 
 ---
 
 ## Case 1 — a traffic light
 
-- **Names:** three states — red, amber, green
-- **Where the transition rule lives:** the electronics behind the light
+<div class="deck-signal">
+  <div class="deck-signal-lamps">
+    <span class="deck-lamp deck-lamp--red deck-lamp--lit"></span>
+    <span class="deck-lamp deck-lamp--amber"></span>
+    <span class="deck-lamp deck-lamp--green"></span>
+  </div>
+  <p class="deck-signal-rule">
+    Names three states — red, amber, green. The transition rule lives in the
+    electronics behind the light, not in the sign itself.
+  </p>
+</div>
 
 Look only at the sign. You cannot tell what comes next.
 
 ```notes
-Weakest case: the sequencing is entirely external. A good opener because
-it's the most obviously "outside the sign."
+Weakest case: the sequencing is entirely external. Ask: what does the
+signal tell you now, and what does it fail to tell you about what happens
+next? Good opener — it's the most obviously "outside the sign" case.
 ```
 
 ---
 
 ## Case 2 — musical notation
 
-- **Names:** a pitch and a duration, read left to right as time
-- **Where the transition rule lives:** mostly an instruction to the performer
+<div class="deck-sequence">
+  <span class="deck-note deck-note--h2" />
+  <span class="deck-note deck-note--h3" />
+  <span class="deck-note deck-note--h1" />
+  <span class="deck-note deck-note--h4" />
+  <span class="deck-note deck-note--h2" />
+</div>
 
-Better: a sequence of notes reads as time passing. But a crescendo, a
-rubato, a held breath — most of what happens *between* notes is written
+Names a pitch and a duration, read left to right as time. But a crescendo, a
+rubato, a held breath — most of what happens *between* marks is written
 beside the notation, not as a state the notation itself transforms through.
 
----
-
-## Case 3 — binary code
-
-- **Names:** a single two-valued unit
-- **Where the transition rule lives:** outside the bit — flipping happens *to* it
-
-A bit is genuinely two-valued. But nothing in "0" or in "1" tells you it is
-about to change, or into what.
-
----
-
-{/* _class: quote */}
-
-> All three name a state clearly. None of them notate the transition itself
-> — only what came before it, or an instruction for what should happen next.
-
----
-
-{/* _class: impact */}
-
-# This course studies a fourth case
-
-A notation with a specific structural mechanism that marks a state as *about
-to transform* — inside the notation, not by outside instruction.
-
----
-
-## What's ahead
-
-- a two-valued unit, built the same way a bit is — week 2
-- combined by a strict rule, the way notes combine into phrases — weeks 3–4
-- a **changing line**, marking a state as about to transform — week 8
-
 ```notes
-Deliberately generic here — no yin/yang, no trigram, no historical framing
-yet. Those terms and their sourcing arrive properly in week 2.
+Abstract marks stand in for notes — don't reproduce real sheet music. Ask:
+does the notation represent the change itself, or tell a performer what
+sequence to produce?
 ```
 
 ---
 
-## After this week, you should be able to
+## Case 3 — a state machine
 
-- compare two or three sign systems on how well each represents *transition*,
-  not just category
-- state this course's central question in your own words
+<div class="deck-chain">
+  <span class="deck-chain-node">A</span>
+  <span class="deck-chain-arrow">→</span>
+  <span class="deck-chain-node">B</span>
+  <span class="deck-chain-arrow">→</span>
+  <span class="deck-chain-node">C</span>
+</div>
+
+Better again: the transitions are drawn explicitly, as arrows between
+states. But the rule for each transition still sits *between* the symbols —
+nothing inside "A" itself says it is about to become "B".
+
+```notes
+Keep this generic — do not connect it to trigrams yet. The teaching point:
+a state machine improves on the traffic light because transitions are
+explicit, but the transition rule still lives between states, not inside
+the state symbol itself.
+```
+
+---
+
+## Case 4 — binary code
+
+<div class="deck-chain">
+  <span class="deck-chain-node">0</span>
+  <span class="deck-chain-arrow">→</span>
+  <span class="deck-chain-node">1</span>
+</div>
+
+Names a single two-valued unit. But nothing in "0" or in "1" tells you it is
+about to change, or into what — flipping happens *to* the bit, from outside
+it.
+
+```notes
+Don't bring in Leibniz, the Yijing, or week 11 material here — this is
+purely the bit as a two-valued unit. That connection is made properly much
+later in the course.
+```
+
+---
+
+## What these cases still lack
+
+| System | What it names | Where the transition rule lives |
+|---|---|---|
+| Traffic light | three states | the electronics behind the light |
+| Musical notation | a pitch and a duration | mostly an instruction to the performer |
+| State machine | discrete states | the arrow between them, not the states |
+| Binary code | a two-valued unit | outside the bit — flipping happens to it |
+
+> All four name a state clearly. None of them notate the transition itself.
+
+```notes
+Let the table do the work — don't re-narrate every row. The one line that
+matters: none of these four notate the transition itself.
+```
+
+---
+
+## This course studies another possibility
+
+<div class="deck-with-image">
+  <div>
+    <p>
+      What if the notation itself could carry information about how it
+      changes?
+    </p>
+    <ul>
+      <li>A grid of 64 related figures, not one isolated sign</li>
+      <li>Each figure built from six stacked solid and broken lines</li>
+      <li>This course studies how that larger structure encodes change</li>
+    </ul>
+  </div>
+  <figure class="deck-image">
+    <img
+      src={hexagramPlate.src}
+      width={hexagramPlate.width}
+      height={hexagramPlate.height}
+      alt="A printed plate of 64 numbered line-figures arranged in a grid, each built from six stacked solid and broken lines"
+    />
+    <figcaption>
+      Source: James Legge (trans.), <em>The Yî King</em>, Plate I (1899).
+    </figcaption>
+  </figure>
+</div>
+
+```notes
+Don't name yin/yang, trigrams, or any construction rule yet — that's next
+week's job. This slide is a question, not an answer. The plate is shown as
+a fragment of evidence that this notation already exists somewhere, not as
+something to explain — the three bullets stay purely descriptive (count and
+line shapes), don't narrate anything beyond them.
+
+Image: Plate I, "The Hexagrams, in the order in which they appear in the
+Yî, and were arranged by king Wăn" — a grid of all 64 hexagrams, numbered
+and named, no interpretive commentary on the plate itself. From James
+Legge (trans.), The Yî King, in F. Max Müller (ed.), Sacred Books of the
+East, vol. XVI (Oxford: Clarendon Press), first published 1882, this
+printing 1899. Digitised by the Internet Archive, item "wg916," leaf 83.
+Source URL: https://archive.org/details/wg916 (page image:
+https://archive.org/download/wg916/page/n83_w1600.jpg), accessed
+2026-09-03. Rights: public domain (published 1882/1899; translator James
+Legge died 1897).
+```
+
+---
+
+## Three questions for this course
+
+<ol class="deck-questions">
+  <li>What are the basic marks?</li>
+  <li>How can they be combined?</li>
+  <li>How can the system encode transformation?</li>
+</ol>
+
+```notes
+These three questions structure the rest of the semester, in order. Nothing
+to answer today — just plant them.
+```
+
+---
+
+## What comes next
+
+<ol class="deck-roadmap-bar">
+  <li class="deck-roadmap--building deck-roadmap--grow-1"></li>
+  <li class="deck-roadmap--building deck-roadmap--grow-2"></li>
+  <li class="deck-roadmap--building deck-roadmap--grow-3"></li>
+  <li class="deck-roadmap--building deck-roadmap--grow-1"></li>
+  <li class="deck-roadmap--history deck-roadmap--grow-4"></li>
+</ol>
+
+<ul class="deck-roadmap-legend">
+  <li class="deck-roadmap--building">Week 2 — the smallest two-state distinction</li>
+  <li class="deck-roadmap--building">Weeks 3–4 — building combinations</li>
+  <li class="deck-roadmap--building">Weeks 5–7 — relationships and arrangements</li>
+  <li class="deck-roadmap--building">Week 8 — transformation</li>
+  <li class="deck-roadmap--history">Weeks 9–12 — history, interpretation, critical reading</li>
+</ul>
+
+```notes
+Roadmap only — don't teach any of this yet. Just show that every question
+raised today has a week where it gets answered.
+```
 
 ---
 
@@ -119,3 +496,8 @@ yet. Those terms and their sourcing arrive properly in week 2.
 
 **One Splits into Two** — the smallest visual distinction that can carry
 meaning.
+
+```notes
+End here. No forward-reference beyond this line — week 2 makes its own
+case for why a two-valued distinction is the right place to start.
+```
